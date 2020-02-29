@@ -11,14 +11,16 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import 'es6-promise/auto';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+import routes from './routes';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 // Install BootstrapVue
 Vue.use(BootstrapVue);
 // Optional install the BootstrapVue icon components plugin
-Vue.user(IconsPlugin);
+Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
@@ -41,6 +43,19 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+const router = new VueRouter({
+    mode: 'history',
+    base: process.env.MIX_BASE_URL,
+    routes
+});
+
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title;
+
+    next();
+});
+
 const app = new Vue({
+    router,
     el: '#app',
 });

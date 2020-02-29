@@ -20,5 +20,5 @@
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::any('/{path?}', function () {
-    return view('layouts.app');
+    return view('app');
 })->where('path', '^(?!api\/)[\/\w\.-]*');
