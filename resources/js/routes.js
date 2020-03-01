@@ -1,13 +1,10 @@
 export default [{
     path: '/',
-    component: require('./layouts/App.vue'),
+    component: resolve => require(['./layouts/App.vue'], resolve),
     children: [{
-        path: '/signin',
-        name: 'signin',
-        component: require('./pages/Signin.vue'),
+        path: 'signin',
+        name: 'Signin',
+        component: resolve => require(['./pages/Signin.vue'], resolve),
         meta: { title: 'Sign in' }
-    }, {
-        path: '*',
-        redirect: '/signin'
     }]
 }];
