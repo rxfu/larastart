@@ -50,7 +50,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    document.title = to.meta.title;
+    var title = to.meta.title || 'Home';
+    document.title = title + ' | ' + process.env.MIX_APP_NAME;
 
     next();
 });

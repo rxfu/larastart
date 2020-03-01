@@ -7,10 +7,16 @@
 
 <script>
     export default {
-        name: 'Sign in',
+        name: 'Signin',
 
         mounted() {
             console.log('Signin page mounted.')
+        },
+
+        data: function() {
+            return {
+                signin: true
+            }
         }
     }
 </script>

@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Default') | {{ config('setting.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset(mix('js/app.js')) }}" defer></script>
@@ -22,7 +22,7 @@
     <!-- Custom styles -->
     @stack('styles')
 </head>
-<body>
+<body class="hold-transition" v-bind:class="{ login-page: signin }">
     <div id="app">
         <router-view></router-view>
     </div>

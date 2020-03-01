@@ -17,9 +17,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Sign in',
+  name: 'Signin',
   mounted: function mounted() {
     console.log('Signin page mounted.');
+  },
+  data: function data() {
+    return {
+      signin: true
+    };
   }
 });
 

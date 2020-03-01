@@ -91598,7 +91598,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 router.beforeEach(function (to, from, next) {
-  document.title = to.meta.title;
+  var title = to.meta.title || 'Home';
+  document.title = title + ' | ' + "Laradmin Start Template";
   next();
 });
 var app = new Vue({
@@ -91743,7 +91744,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! AMD require */ 1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/Signin.vue */ "./resources/js/pages/Signin.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: {
-      title: 'Sign in'
+      title: '登录'
     }
   }]
 }]);
