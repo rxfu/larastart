@@ -1,9 +1,5 @@
 <template>
-    <div>
-        test App
-        <router-link to="/signin">Go to Sign in</router-link>
-        <router-view></router-view>
-    </div>
+    <navigation></navigation>
 </template>
 
 <script>

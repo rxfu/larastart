@@ -60,6 +60,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Signin',
   mounted: function mounted() {
@@ -89,81 +92,83 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "login-box" }, [
-    _c("div", { staticClass: "login-logo" }, [
-      _vm._v("\n        " + _vm._s(_vm.title) + "\n    ")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c(
-        "div",
-        { staticClass: "card-body login-card-body" },
-        [
-          _c("p", { staticClass: "login-box-msg" }, [_vm._v("登录")]),
-          _vm._v(" "),
-          _c("alert"),
-          _vm._v(" "),
-          _c("form", { attrs: { action: "#", method: "post" } }, [
-            _c("div", { staticClass: "input-group mb-3" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "username",
-                  name: "username",
-                  placeholder: "用户名",
-                  required: "",
-                  autofocus: ""
-                }
-              }),
+  return _c(
+    "div",
+    { staticClass: "wrapper" },
+    [
+      _c("navigation"),
+      _vm._v(" "),
+      _c("div", { staticClass: "login-page" }, [
+        _c("div", { staticClass: "login-box" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-body login-card-body" }, [
+              _c("p", { staticClass: "login-box-msg" }, [_vm._v("- 登录 -")]),
               _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "span",
-                  { staticClass: "input-group-text" },
-                  [
-                    _c("font-awesome-icon", {
-                      attrs: { icon: ["fas", "user"] }
-                    })
-                  ],
-                  1
-                )
+              _c("form", { attrs: { action: "#", method: "post" } }, [
+                _c("div", { staticClass: "input-group mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "username",
+                      name: "username",
+                      placeholder: "用户名",
+                      required: "",
+                      autofocus: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "span",
+                      { staticClass: "input-group-text" },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "user"] }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "password",
+                      id: "password",
+                      name: "password",
+                      placeholder: "密码",
+                      required: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "span",
+                      { staticClass: "input-group-text" },
+                      [
+                        _c("font-awesome-icon", {
+                          attrs: { icon: ["fas", "lock"] }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group mb-3" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "password",
-                  id: "password",
-                  name: "password",
-                  placeholder: "密码",
-                  required: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "span",
-                  { staticClass: "input-group-text" },
-                  [
-                    _c("font-awesome-icon", {
-                      attrs: { icon: ["fas", "lock"] }
-                    })
-                  ],
-                  1
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
+            ])
           ])
-        ],
-        1
-      )
-    ])
-  ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("foot")
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -177,7 +182,7 @@ var staticRenderFns = [
             _c("input", {
               attrs: { type: "checkbox", value: "1", name: "remember_me" }
             }),
-            _vm._v(" 记住我\n                            ")
+            _vm._v(" 记住我\n                                    ")
           ])
         ])
       ]),
