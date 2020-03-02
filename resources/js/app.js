@@ -11,17 +11,12 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import 'es6-promise/auto';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VueBodyClass from 'vue-body-class';
 
 import routes from './routes';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
-// Install BootstrapVue
-Vue.use(BootstrapVue);
-// Optional install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
@@ -57,7 +52,7 @@ router.beforeEach((to, from, next) => {
     document.title = title + ' | ' + process.env.MIX_APP_NAME;
 
     vueBodyClass.guard(to, next);
-    
+
     next();
 });
 
