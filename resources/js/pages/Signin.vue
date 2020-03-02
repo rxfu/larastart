@@ -18,7 +18,7 @@
                         <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
                         <div class="input-group-append">
                             <span class="input-group-text">
-                                <i class="fas fa-user"></i>
+                                <font-awesome-icon :icon="['fas', 'user']" />
                             </span>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
                         <div class="input-group-append">
                             <span class="input-group-text">
-                                <i class="fas fa-lock"></i>
+                                <font-awesome-icon :icon="['fas', 'lock']" />
                             </span>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
+                            <button type="submit" class="btn btn-primary btn-block">登录</button>
                         </div>
                     </div>
                 </form>
@@ -59,7 +59,7 @@
 
         data: function() {
             return {
-                title: process.env.MIX_APP_NAME
+                title: process.env.MIX_APP_SLUG
             }
         }
     }

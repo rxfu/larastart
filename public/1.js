@@ -67,7 +67,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      title: "Laradmin Start Template"
+      title: "LaraStart"
     };
   }
 });
@@ -103,7 +103,62 @@ var render = function() {
           _vm._v(" "),
           _c("alert"),
           _vm._v(" "),
-          _vm._m(0)
+          _c("form", { attrs: { action: "#", method: "post" } }, [
+            _c("div", { staticClass: "input-group mb-3" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "username",
+                  name: "username",
+                  placeholder: "用户名",
+                  required: "",
+                  autofocus: ""
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c(
+                  "span",
+                  { staticClass: "input-group-text" },
+                  [
+                    _c("font-awesome-icon", {
+                      attrs: { icon: ["fas", "user"] }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group mb-3" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "password",
+                  id: "password",
+                  name: "password",
+                  placeholder: "密码",
+                  required: ""
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c(
+                  "span",
+                  { staticClass: "input-group-text" },
+                  [
+                    _c("font-awesome-icon", {
+                      attrs: { icon: ["fas", "lock"] }
+                    })
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
         ],
         1
       )
@@ -115,68 +170,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#", method: "post" } }, [
-      _c("div", { staticClass: "input-group mb-3" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "username",
-            name: "username",
-            placeholder: "用户名",
-            required: "",
-            autofocus: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group-append" }, [
-          _c("span", { staticClass: "input-group-text" }, [
-            _c("i", { staticClass: "fas fa-user" })
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-8" }, [
+        _c("div", { staticClass: "checkbox icheck" }, [
+          _c("label", [
+            _c("input", {
+              attrs: { type: "checkbox", value: "1", name: "remember_me" }
+            }),
+            _vm._v(" 记住我\n                            ")
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "input-group mb-3" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "password",
-            id: "password",
-            name: "password",
-            placeholder: "密码",
-            required: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group-append" }, [
-          _c("span", { staticClass: "input-group-text" }, [
-            _c("i", { staticClass: "fas fa-lock" })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-8" }, [
-          _c("div", { staticClass: "checkbox icheck" }, [
-            _c("label", [
-              _c("input", {
-                attrs: { type: "checkbox", value: "1", name: "remember_me" }
-              }),
-              _vm._v(" 记住我\n                            ")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-block btn-flat",
-              attrs: { type: "submit" }
-            },
-            [_vm._v("登录")]
-          )
-        ])
+      _c("div", { staticClass: "col-4" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("登录")]
+        )
       ])
     ])
   }

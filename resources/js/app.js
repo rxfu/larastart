@@ -13,12 +13,18 @@ import Vuex from 'vuex';
 import 'es6-promise/auto';
 import VueBodyClass from 'vue-body-class';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 import routes from './routes';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
 Vue.config.productionTip = false;
+
+library.add(faUser, faLock);
 
 /**
  * The following block of code may be used to automatically register your
@@ -32,6 +38,7 @@ Vue.config.productionTip = false;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
