@@ -5,6 +5,9 @@ export default [{
         path: 'signin',
         name: 'Signin',
         component: resolve => require(['./pages/Signin.vue'], resolve),
-        meta: { title: '登录' }
+        meta: { 
+            title: '登录',
+            bodyClass: 'login-page'
+        }
     }]
 }];

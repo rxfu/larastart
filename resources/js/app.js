@@ -12,6 +12,7 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import 'es6-promise/auto';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import VueBodyClass from 'vue-body-class';
 
 import routes from './routes';
 
@@ -49,10 +50,14 @@ const router = new VueRouter({
     routes
 });
 
+const vueBodyClass = new VueBodyClass(routes);
+
 router.beforeEach((to, from, next) => {
     var title = to.meta.title || 'Home';
     document.title = title + ' | ' + process.env.MIX_APP_NAME;
 
+    vueBodyClass.guard(to, next);
+    
     next();
 });
 

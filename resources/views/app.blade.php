@@ -22,7 +22,7 @@
     <!-- Custom styles -->
     @stack('styles')
 </head>
-<body class="hold-transition" v-bind:class="{ login-page: signin }">
+<body class="hold-transition">
     <div id="app">
         <router-view></router-view>
     </div>
