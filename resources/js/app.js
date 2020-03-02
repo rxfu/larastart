@@ -3,6 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+import '@babel/polyfill';
 
 require('./bootstrap');
 
@@ -10,7 +11,6 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import 'es6-promise/auto';
 import VueBodyClass from 'vue-body-class';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
