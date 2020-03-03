@@ -32,6 +32,7 @@
         "@fortawesome/vue-fontawesome": "^0.1.9",
         "admin-lte": "^3.0.2",
         "bootstrap-vue": "^2.5.0",
+        "es6-promise": "^4.2.8",
         "portal-vue": "^2.1.7",
         "vue-body-class": "^3.0.2",
         "vue-router": "^3.1.6",

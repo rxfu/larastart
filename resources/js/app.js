@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import '@babel/polyfill';
+import 'es6-promise/auto';
 
 require('./bootstrap');
 
