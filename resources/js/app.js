@@ -20,7 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import routes from './routes';
 
-// 解决 webpack 4 异步组件无法解析的问题
+// 解决 webpack 4 异步组件无法解析的问题，此问题为 webpack 4 的官方bug
 import '../sass/empty.scss';
 
 Vue.use(VueRouter);
