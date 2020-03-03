@@ -3,50 +3,54 @@
         <!-- Navigation -->
         <navigation></navigation>
 
-        <div class="login-page">
-            <!-- Login box -->
-            <div class="login-box">
-                <!-- Login card -->
-                <div class="card">
-                    <div class="card-body login-card-body">
-                        <p class="login-box-msg">- 登录 -</p>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="login-page">
+                    <!-- Login box -->
+                    <div class="login-box">
+                        <!-- Login card -->
+                        <div class="card">
+                            <div class="card-body login-card-body">
+                                <p class="login-box-msg">- 登录 -</p>
 
-                        <form action="#" method="post">
-                            <div class="input-group mb-3">
-                                <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <font-awesome-icon :icon="['fas', 'user']" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <font-awesome-icon :icon="['fas', 'lock']" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="checkbox icheck">
-                                        <label>
-                                            <input type="checkbox" value="1" name="remember_me"> 记住我
-                                        </label>
+                                <form action="#" method="post">
+                                    <div class="input-group mb-3">
+                                        <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <font-awesome-icon :icon="['fas', 'user']" />
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="input-group mb-3">
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <font-awesome-icon :icon="['fas', 'lock']" />
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="checkbox icheck">
+                                                <label>
+                                                    <input type="checkbox" value="1" name="remember_me"> 记住我
+                                                </label>
+                                            </div>
+                                        </div>
 
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block">登录</button>
-                                </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-primary btn-block">登录</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        
         <!-- Main Footer -->
         <foot></foot>
     </div>
@@ -67,3 +71,9 @@
         }
     }
 </script>
+
+<style scoped>
+.login-page {
+    height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px)) !important;
+}
+</style>

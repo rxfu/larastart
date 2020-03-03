@@ -2,19 +2,27 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="float-right d-none d-sm-inline">
-        Anything you want
+            欢迎使用{{ appSlug }}
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{ year }} <a href="https://adminlte.io">{{ appName }}</a>.</strong> 保留所有权利.
     </footer>
 </template>
 
 <script>
 export default {
-    name: 'Footer',
+    name: 'Foot',
 
     mounted() {
         console.log('Footer mounted.');
+    },
+
+    data: function() {
+        return {
+            year: new Date().getFullYear(),
+            appName: process.env.MIX_APP_NAME,
+            appSlug: process.env.MIX_APP_SLUG
+        }
     }
 }
 </script>
