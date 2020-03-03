@@ -13,10 +13,6 @@
 export default {
     name: 'Foot',
 
-    mounted() {
-        console.log('Footer mounted.');
-    },
-
     data: function() {
         return {
             year: new Date().getFullYear(),

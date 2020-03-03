@@ -14,8 +14,8 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VueBodyClass from 'vue-body-class';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import routes from './routes';
@@ -28,7 +28,8 @@ Vue.use(Vuex);
 
 Vue.config.productionTip = false;
 
-library.add(faUser, faLock);
+library.add(fas);
+dom.watch();
 
 /**
  * The following block of code may be used to automatically register your
@@ -41,10 +42,11 @@ library.add(faUser, faLock);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('navigation', require('./components/Navigation.vue').default);
 Vue.component('foot', require('./components/Foot.vue').default);
+Vue.component('alert', require('./components/Alert.vue').default);
+Vue.component('validation', require('./components/Validation.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

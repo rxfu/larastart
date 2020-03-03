@@ -30,10 +30,6 @@
 export default {
     name: 'Navigation',
 
-    mounted() {
-        console.log('Navigation mounted.');
-    },
-
     data: function() {
         return {
             title: process.env.MIX_APP_NAME

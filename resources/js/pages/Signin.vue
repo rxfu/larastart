@@ -8,6 +8,9 @@
                 <div class="login-page">
                     <!-- Login box -->
                     <div class="login-box">
+                        <!-- Alert -->
+                        <alert></alert>
+
                         <!-- Login card -->
                         <div class="card">
                             <div class="card-body login-card-body">
@@ -15,20 +18,22 @@
 
                                 <form action="#" method="post">
                                     <div class="input-group mb-3">
-                                        <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
+                                        <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors.username }" placeholder="用户名" required autofocus>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <font-awesome-icon :icon="['fas', 'user']" />
                                             </span>
                                         </div>
+                                        <validation :error="error.username" v-if="error.username"></validation>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
+                                        <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors.password }" placeholder="密码" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <font-awesome-icon :icon="['fas', 'lock']" />
                                             </span>
                                         </div>
+                                        <validation :error="error.password" v-if="error.password"></validation>
                                     </div>
                                     <div class="row">
                                         <div class="col-8">
@@ -60,13 +65,25 @@
     export default {
         name: 'Signin',
 
-        mounted() {
-            console.log('Signin page mounted.')
-        },
-
         data: function() {
             return {
-                title: process.env.MIX_APP_SLUG
+                title: process.env.MIX_APP_SLUG,
+                errors: []
+            }
+        },
+
+        methods: {
+            onSubmit() {
+                axios.post('/login', {
+                    username: this.username,
+                    password: this.password,
+                }).then(reponse => {
+                    console.log('successful');
+                }).catch(error => {
+                    if (error.reponse.status == 422) {
+                        this.errors = error.reponse.data.errors;
+                    }
+                })
             }
         }
     }
