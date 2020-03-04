@@ -13,7 +13,7 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VueBodyClass from 'vue-body-class';
-import { ValidationProvider, localize, extend } from 'vee-validate';
+import { ValidationProvider, ValidationObserver, localize, extend } from 'vee-validate/dist/vee-validate.full.esm';
 import zh_CN from 'vee-validate/dist/locale/zh_CN.json';
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
@@ -47,6 +47,7 @@ localize('zh_CN', zh_CN);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('validation-provider', ValidationProvider);
+Vue.component('validation-observer', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('navigation', require('./components/Navigation.vue').default);
 Vue.component('foot', require('./components/Foot.vue').default);

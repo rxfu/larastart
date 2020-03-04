@@ -16,43 +16,45 @@
                             <div class="card-body login-card-body">
                                 <p class="login-box-msg">- 登录 -</p>
 
-                                <form method="post" @submit.prevent="onSubmit" autocomplete="off">
-                                    <validation-provider rules="required" v-slot="{ errors }" slim>
-                                        <div class="input-group mb-3">
-                                            <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors.username }" placeholder="用户名" autofocus>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <font-awesome-icon :icon="['fas', 'user']" />
-                                                </span>
+                                <validation-observer v-slot="{ invalid } ">
+                                    <form method="post" @submit.prevent="onSubmit" autocomplete="off">
+                                        <validation-provider rules="required" v-slot="{ errors }" slim>
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="用户名" required autofocus>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <font-awesome-icon :icon="['fas', 'user']" />
+                                                    </span>
+                                                </div>
+                                                <invalid :message="errors[0]"></invalid>
                                             </div>
-                                            <invalid :message="errors[0]" v-if="errors"></invalid>
-                                        </div>
-                                    </validation-provider>
-                                    <validation-provider rules="required|min:8" v-slot="{ errors }" slim>
-                                        <div class="input-group mb-3">
-                                            <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors.password }" placeholder="密码">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">
-                                                    <font-awesome-icon :icon="['fas', 'lock']" />
-                                                </span>
+                                        </validation-provider>
+                                        <validation-provider rules="required" v-slot="{ errors }" slim>
+                                            <div class="input-group mb-3">
+                                                <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="密码" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text">
+                                                        <font-awesome-icon :icon="['fas', 'lock']" />
+                                                    </span>
+                                                </div>
+                                                <invalid :message="errors[0]"></invalid>
                                             </div>
-                                            <invalid :message="errors[0]" v-if="errors"></invalid>
-                                        </div>
-                                    </validation-provider>
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <div class="checkbox icheck">
-                                                <label>
-                                                    <input type="checkbox" value="1" name="remember_me"> 记住我
-                                                </label>
+                                        </validation-provider>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="checkbox icheck">
+                                                    <label>
+                                                        <input type="checkbox" value="1" name="remember_me"> 记住我
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="col-4">
-                                            <button type="submit" class="btn btn-primary btn-block">登录</button>
+                                            <div class="col-4">
+                                                <button type="submit" class="btn btn-primary btn-block" :disabled="invalid">登录</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </validation-observer>
                             </div>
                         </div>
                     </div>
@@ -69,18 +71,16 @@
     export default {
         name: 'Signin',
 
-        data: function() {
-            return {
-                title: process.env.MIX_APP_SLUG,
-                username: null,
-                password: null,
-                state: {
-                    type: null,
-                    message: null
-                },
-                errors: []
-            }
-        },
+        data: () => ({
+            title: process.env.MIX_APP_SLUG,
+            username: null,
+            password: null,
+            state: {
+                type: null,
+                message: null
+            },
+            errors: []
+        }),
 
         methods: {
             onSubmit() {
@@ -89,6 +89,7 @@
                     password: this.password,
                 }).then(response => {
                     console.log('successful');
+                    console.log(response);
                     this.state = {
                         type: 'success',
                         message: '登录成功，欢迎使用本系统'

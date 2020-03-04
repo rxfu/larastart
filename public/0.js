@@ -76,6 +76,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Signin',
   data: function data() {
@@ -99,6 +101,7 @@ __webpack_require__.r(__webpack_exports__);
         password: this.password
       }).then(function (response) {
         console.log('successful');
+        console.log(response);
         _this.state = {
           type: 'success',
           message: '登录成功，欢迎使用本系统'
@@ -198,175 +201,299 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-body login-card-body" }, [
-                    _c("p", { staticClass: "login-box-msg" }, [
-                      _vm._v("- 登录 -")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "form",
-                      {
-                        attrs: { method: "post", autocomplete: "off" },
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.onSubmit($event)
+                  _c(
+                    "div",
+                    { staticClass: "card-body login-card-body" },
+                    [
+                      _c("p", { staticClass: "login-box-msg" }, [
+                        _vm._v("- 登录 -")
+                      ]),
+                      _vm._v(" "),
+                      _c("validation-observer", {
+                        scopedSlots: _vm._u([
+                          {
+                            key: "default",
+                            fn: function(ref) {
+                              var invalid = ref.invalid
+                              return [
+                                _c(
+                                  "form",
+                                  {
+                                    attrs: {
+                                      method: "post",
+                                      autocomplete: "off"
+                                    },
+                                    on: {
+                                      submit: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.onSubmit($event)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("validation-provider", {
+                                      attrs: {
+                                        rules: "required|alpha",
+                                        immediate: "",
+                                        slim: ""
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "input-group mb-3"
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value: _vm.username,
+                                                          expression: "username"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      class: {
+                                                        "is-invalid": errors[0]
+                                                      },
+                                                      attrs: {
+                                                        type: "text",
+                                                        id: "username",
+                                                        name: "username",
+                                                        placeholder: "用户名",
+                                                        autofocus: ""
+                                                      },
+                                                      domProps: {
+                                                        value: _vm.username
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.username =
+                                                            $event.target.value
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "input-group-append"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "input-group-text"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "font-awesome-icon",
+                                                              {
+                                                                attrs: {
+                                                                  icon: [
+                                                                    "fas",
+                                                                    "user"
+                                                                  ]
+                                                                }
+                                                              }
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("invalid", {
+                                                      attrs: {
+                                                        message: errors[0]
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c("validation-provider", {
+                                      attrs: {
+                                        rules: "required|min:8",
+                                        immediate: "",
+                                        slim: ""
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "default",
+                                            fn: function(ref) {
+                                              var errors = ref.errors
+                                              return [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass:
+                                                      "input-group mb-3"
+                                                  },
+                                                  [
+                                                    _c("input", {
+                                                      directives: [
+                                                        {
+                                                          name: "model",
+                                                          rawName: "v-model",
+                                                          value: _vm.password,
+                                                          expression: "password"
+                                                        }
+                                                      ],
+                                                      staticClass:
+                                                        "form-control",
+                                                      class: {
+                                                        "is-invalid": errors[0]
+                                                      },
+                                                      attrs: {
+                                                        type: "password",
+                                                        id: "password",
+                                                        name: "password",
+                                                        placeholder: "密码"
+                                                      },
+                                                      domProps: {
+                                                        value: _vm.password
+                                                      },
+                                                      on: {
+                                                        input: function(
+                                                          $event
+                                                        ) {
+                                                          if (
+                                                            $event.target
+                                                              .composing
+                                                          ) {
+                                                            return
+                                                          }
+                                                          _vm.password =
+                                                            $event.target.value
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "div",
+                                                      {
+                                                        staticClass:
+                                                          "input-group-append"
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "input-group-text"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "font-awesome-icon",
+                                                              {
+                                                                attrs: {
+                                                                  icon: [
+                                                                    "fas",
+                                                                    "lock"
+                                                                  ]
+                                                                }
+                                                              }
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c("invalid", {
+                                                      attrs: {
+                                                        message: errors[0]
+                                                      }
+                                                    })
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      )
+                                    }),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("div", { staticClass: "col-8" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "checkbox icheck" },
+                                          [
+                                            _c("label", [
+                                              _c("input", {
+                                                attrs: {
+                                                  type: "checkbox",
+                                                  value: "1",
+                                                  name: "remember_me"
+                                                }
+                                              }),
+                                              _vm._v(
+                                                " 记住我\n                                                "
+                                              )
+                                            ])
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "col-4" }, [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-primary btn-block",
+                                            attrs: {
+                                              type: "submit",
+                                              disabled: invalid
+                                            }
+                                          },
+                                          [_vm._v("登录")]
+                                        )
+                                      ])
+                                    ])
+                                  ],
+                                  1
+                                )
+                              ]
+                            }
                           }
-                        }
-                      },
-                      [
-                        _c("validation-provider", {
-                          attrs: { rules: "required", slim: "" },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "default",
-                              fn: function(ref) {
-                                var errors = ref.errors
-                                return [
-                                  _c(
-                                    "div",
-                                    { staticClass: "input-group mb-3" },
-                                    [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.username,
-                                            expression: "username"
-                                          }
-                                        ],
-                                        staticClass: "form-control",
-                                        class: {
-                                          "is-invalid": errors.username
-                                        },
-                                        attrs: {
-                                          type: "text",
-                                          id: "username",
-                                          name: "username",
-                                          placeholder: "用户名",
-                                          autofocus: ""
-                                        },
-                                        domProps: { value: _vm.username },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.username = $event.target.value
-                                          }
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "input-group-append" },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "input-group-text" },
-                                            [
-                                              _c("font-awesome-icon", {
-                                                attrs: { icon: ["fas", "user"] }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      errors
-                                        ? _c("invalid", {
-                                            attrs: { message: errors[0] }
-                                          })
-                                        : _vm._e()
-                                    ],
-                                    1
-                                  )
-                                ]
-                              }
-                            }
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _c("validation-provider", {
-                          attrs: { rules: "required|min:8", slim: "" },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "default",
-                              fn: function(ref) {
-                                var errors = ref.errors
-                                return [
-                                  _c(
-                                    "div",
-                                    { staticClass: "input-group mb-3" },
-                                    [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.password,
-                                            expression: "password"
-                                          }
-                                        ],
-                                        staticClass: "form-control",
-                                        class: {
-                                          "is-invalid": errors.password
-                                        },
-                                        attrs: {
-                                          type: "password",
-                                          id: "password",
-                                          name: "password",
-                                          placeholder: "密码"
-                                        },
-                                        domProps: { value: _vm.password },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.password = $event.target.value
-                                          }
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "div",
-                                        { staticClass: "input-group-append" },
-                                        [
-                                          _c(
-                                            "span",
-                                            { staticClass: "input-group-text" },
-                                            [
-                                              _c("font-awesome-icon", {
-                                                attrs: { icon: ["fas", "lock"] }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      errors
-                                        ? _c("invalid", {
-                                            attrs: { message: errors[0] }
-                                          })
-                                        : _vm._e()
-                                    ],
-                                    1
-                                  )
-                                ]
-                              }
-                            }
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _vm._m(0)
-                      ],
-                      1
-                    )
-                  ])
+                        ])
+                      })
+                    ],
+                    1
+                  )
                 ])
               ],
               1
@@ -380,36 +507,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-8" }, [
-        _c("div", { staticClass: "checkbox icheck" }, [
-          _c("label", [
-            _c("input", {
-              attrs: { type: "checkbox", value: "1", name: "remember_me" }
-            }),
-            _vm._v(" 记住我\n                                            ")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-block",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("登录")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
