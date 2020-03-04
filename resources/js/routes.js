@@ -7,7 +7,7 @@ export default [{
     children: [{
         path: '/dashboard',
         name: 'Dashboard',
-        component: resolve => require(['./pages/Dashboard.vue'], resolve),
+        component: resolve => require(['./views/home/Dashboard.vue'], resolve),
         meta: {
             title: '首页'
         }
@@ -15,7 +15,7 @@ export default [{
 }, {
     path: '/signin',
     name: 'Signin',
-    component: resolve => require(['./pages/Signin.vue'], resolve),
+    component: resolve => require(['./views/auth/Signin.vue'], resolve),
     meta: {
         title: '登录',
         bodyClass: 'layout-top-nav'

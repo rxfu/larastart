@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'base' => '/larastart',
-    'name' => 'Laradmin Start Template',
-    'slug' => 'LaraStart',
+    'base' => env('MIX_BASE_URL', '/'),
+    'name' => env('MIX_APP_NAME', 'Laradmin'),
+    'slug' => env('MIX_APP_SLUG', 'LaraStart'),
     'keywords' => 'Laravel, Bootstrap, Vue.js, AdminLTE, Admin template',
     'description' => 'An admin boilerplate developed with Bootstrap, Vue and AdminLTE base on Laravel',
     'author' => 'Fu Rongxin',
