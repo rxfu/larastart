@@ -15,10 +15,7 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Contact</a>
+                        <router-link :to="/" class="nav-link">首页</router-link>
                     </li>
                 </ul>
             </div>

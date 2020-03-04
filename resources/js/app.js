@@ -13,6 +13,8 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VueBodyClass from 'vue-body-class';
+import { ValidationProvider, localize, extend } from 'vee-validate';
+import zh_CN from 'vee-validate/dist/locale/zh_CN.json';
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -31,6 +33,8 @@ Vue.config.productionTip = false;
 library.add(fas);
 dom.watch();
 
+localize('zh_CN', zh_CN);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -42,11 +46,12 @@ dom.watch();
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('validation-provider', ValidationProvider);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('navigation', require('./components/Navigation.vue').default);
 Vue.component('foot', require('./components/Foot.vue').default);
 Vue.component('alert', require('./components/Alert.vue').default);
-Vue.component('validation', require('./components/Validation.vue').default);
+Vue.component('invalid', require('./components/Invalid.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

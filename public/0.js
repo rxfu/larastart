@@ -72,11 +72,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Signin',
   data: function data() {
     return {
       title: "LaraStart",
+      username: null,
+      password: null,
       errors: []
     };
   },
@@ -185,120 +191,170 @@ var render = function() {
                       _vm._v("- 登录 -")
                     ]),
                     _vm._v(" "),
-                    _c("form", { attrs: { action: "#", method: "post" } }, [
-                      _c(
-                        "div",
-                        { staticClass: "input-group mb-3" },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.username,
-                                expression: "username"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: { "is-invalid": _vm.errors.username },
-                            attrs: {
-                              type: "text",
-                              id: "username",
-                              name: "username",
-                              placeholder: "用户名",
-                              required: "",
-                              autofocus: ""
-                            },
-                            domProps: { value: _vm.username },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                    _c(
+                      "form",
+                      {
+                        attrs: { method: "post", autocomplete: "off" },
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.onSubmit($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "input-group mb-3" },
+                          [
+                            _c("validation-provider", {
+                              attrs: { rules: "required" },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "default",
+                                  fn: function(ref) {
+                                    var errors = ref.errors
+                                    return [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.username,
+                                            expression: "username"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": errors.username
+                                        },
+                                        attrs: {
+                                          type: "text",
+                                          id: "username",
+                                          name: "username",
+                                          placeholder: "用户名",
+                                          required: "",
+                                          autofocus: ""
+                                        },
+                                        domProps: { value: _vm.username },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.username = $event.target.value
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-append" },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "input-group-text" },
+                                            [
+                                              _c("font-awesome-icon", {
+                                                attrs: { icon: ["fas", "user"] }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      errors
+                                        ? _c("invalid", {
+                                            attrs: { message: errors[0] }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  }
                                 }
-                                _vm.username = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "input-group-append" }, [
-                            _c(
-                              "span",
-                              { staticClass: "input-group-text" },
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: { icon: ["fas", "user"] }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm.error.username
-                            ? _c("validation", {
-                                attrs: { error: _vm.error.username }
-                              })
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "input-group mb-3" },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.password,
-                                expression: "password"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: { "is-invalid": _vm.errors.password },
-                            attrs: {
-                              type: "password",
-                              id: "password",
-                              name: "password",
-                              placeholder: "密码",
-                              required: ""
-                            },
-                            domProps: { value: _vm.password },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                              ])
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "input-group mb-3" },
+                          [
+                            _c("validation-provider", {
+                              attrs: { rules: "required|min:8" },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "default",
+                                  fn: function(ref) {
+                                    var errors = ref.errors
+                                    return [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.password,
+                                            expression: "password"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": errors.password
+                                        },
+                                        attrs: {
+                                          type: "password",
+                                          id: "password",
+                                          name: "password",
+                                          placeholder: "密码",
+                                          required: ""
+                                        },
+                                        domProps: { value: _vm.password },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.password = $event.target.value
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        { staticClass: "input-group-append" },
+                                        [
+                                          _c(
+                                            "span",
+                                            { staticClass: "input-group-text" },
+                                            [
+                                              _c("font-awesome-icon", {
+                                                attrs: { icon: ["fas", "lock"] }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      errors
+                                        ? _c("invalid", {
+                                            attrs: { message: errors[0] }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  }
                                 }
-                                _vm.password = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "input-group-append" }, [
-                            _c(
-                              "span",
-                              { staticClass: "input-group-text" },
-                              [
-                                _c("font-awesome-icon", {
-                                  attrs: { icon: ["fas", "lock"] }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm.error.password
-                            ? _c("validation", {
-                                attrs: { error: _vm.error.password }
-                              })
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._m(0)
-                    ])
+                              ])
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _vm._m(0)
+                      ]
+                    )
                   ])
                 ])
               ],

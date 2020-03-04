@@ -16,24 +16,28 @@
                             <div class="card-body login-card-body">
                                 <p class="login-box-msg">- 登录 -</p>
 
-                                <form action="#" method="post">
+                                <form method="post" @submit.prevent="onSubmit" autocomplete="off">
                                     <div class="input-group mb-3">
-                                        <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors.username }" placeholder="用户名" required autofocus>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <font-awesome-icon :icon="['fas', 'user']" />
-                                            </span>
-                                        </div>
-                                        <validation :error="error.username" v-if="error.username"></validation>
+                                        <validation-provider rules="required" v-slot="{ errors }">
+                                            <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors.username }" placeholder="用户名" required autofocus>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <font-awesome-icon :icon="['fas', 'user']" />
+                                                </span>
+                                            </div>
+                                            <invalid :message="errors[0]" v-if="errors"></invalid>
+                                        </validation-provider>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors.password }" placeholder="密码" required>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <font-awesome-icon :icon="['fas', 'lock']" />
-                                            </span>
-                                        </div>
-                                        <validation :error="error.password" v-if="error.password"></validation>
+                                        <validation-provider rules="required|min:8" v-slot="{ errors }">
+                                            <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors.password }" placeholder="密码" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <font-awesome-icon :icon="['fas', 'lock']" />
+                                                </span>
+                                            </div>
+                                            <invalid :message="errors[0]" v-if="errors"></invalid>
+                                        </validation-provider>
                                     </div>
                                     <div class="row">
                                         <div class="col-8">
@@ -68,6 +72,8 @@
         data: function() {
             return {
                 title: process.env.MIX_APP_SLUG,
+                username: null,
+                password: null,
                 errors: []
             }
         },
