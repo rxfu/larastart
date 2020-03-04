@@ -11854,34 +11854,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
+  props: ['state'],
   computed: {
-    stateClass: function stateClass() {
-      return {
-        'alert-danger': this.error,
-        'alert-info': this.info,
-        'alert-warning': this.warning,
-        'alert-success': this.success
-      };
-    },
-    stateIcon: function stateIcon() {
-      return {
-        'fa-ban': this.error,
-        'fa-info': this.info,
-        'fa-warning': this.warning,
-        'fa-success': this.success
-      };
-    },
-    stateTitle: function stateTitle() {
-      return {
-        '错误': this.error,
-        '信息': this.info,
-        '警告': this.warning,
-        '成功': this.success
-      };
+    tip: function tip() {
+      var data = {};
+
+      switch (this.state.type) {
+        case 'error':
+          data = {
+            'class': 'alert-danger',
+            'icon': 'fa-ban',
+            'title': '错误'
+          };
+          break;
+
+        case 'info':
+          data = {
+            'class': 'alert-info',
+            'icon': 'fa-info',
+            'title': '信息'
+          };
+          break;
+
+        case 'warning':
+          data = {
+            'class': 'alert-warning',
+            'icon': 'fa-warning',
+            'title': '警告'
+          };
+          break;
+
+        case 'success':
+          data = {
+            'class': 'alert-success',
+            'icon': 'fa-check',
+            'title': '成功'
+          };
+          break;
+
+        default:
+          data = {
+            'class': 'alert-secondary',
+            'icon': 'fa-info',
+            'title': '其他'
+          };
+      }
+
+      return data;
     }
   }
 });
@@ -61371,42 +61392,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.messages
-    ? _c(
-        "div",
-        _vm._l(_vm.errors, function(value, key) {
-          return _c(
-            "div",
-            {
-              key: key,
-              staticClass: "alert alert-dismissible",
-              class: _vm.stateClass
-            },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "close",
-                  attrs: {
-                    type: "button",
-                    "data-dismiss": "alert",
-                    "aria-hidden": "true"
-                  }
-                },
-                [_vm._v("×")]
-              ),
-              _vm._v(" "),
-              _c("h5", [
-                _c("i", { staticClass: "icon fas", class: _vm.stateIcon }),
-                _vm._v(" " + _vm._s(_vm.stateTitle) + "！\n        ")
-              ]),
-              _vm._v("\n        " + _vm._s(value) + "\n    ")
-            ]
-          )
-        }),
-        0
-      )
-    : _vm._e()
+  return _c(
+    "div",
+    { staticClass: "alert alert-dismissible", class: _vm.tip.class },
+    [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "alert",
+            "aria-hidden": "true"
+          }
+        },
+        [_vm._v("×")]
+      ),
+      _vm._v(" "),
+      _c("h5", [
+        _c("i", { staticClass: "icon fas", class: _vm.tip.icon }),
+        _vm._v(" " + _vm._s(_vm.tip.title) + "！\n    ")
+      ]),
+      _vm._v("\n    " + _vm._s(_vm.state.message) + "\n")
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

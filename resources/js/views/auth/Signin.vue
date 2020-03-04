@@ -9,7 +9,7 @@
                     <!-- Login box -->
                     <div class="login-box">
                         <!-- Alert -->
-                        <alert></alert>
+                        <alert v-if="state.message" :state="state"></alert>
 
                         <!-- Login card -->
                         <div class="card">
@@ -17,28 +17,28 @@
                                 <p class="login-box-msg">- 登录 -</p>
 
                                 <form method="post" @submit.prevent="onSubmit" autocomplete="off">
-                                    <div class="input-group mb-3">
-                                        <validation-provider rules="required" v-slot="{ errors }">
-                                            <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors.username }" placeholder="用户名" required autofocus>
+                                    <validation-provider rules="required" v-slot="{ errors }" slim>
+                                        <div class="input-group mb-3">
+                                            <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors.username }" placeholder="用户名" autofocus>
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <font-awesome-icon :icon="['fas', 'user']" />
                                                 </span>
                                             </div>
                                             <invalid :message="errors[0]" v-if="errors"></invalid>
-                                        </validation-provider>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <validation-provider rules="required|min:8" v-slot="{ errors }">
-                                            <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors.password }" placeholder="密码" required>
+                                        </div>
+                                    </validation-provider>
+                                    <validation-provider rules="required|min:8" v-slot="{ errors }" slim>
+                                        <div class="input-group mb-3">
+                                            <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors.password }" placeholder="密码">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">
                                                     <font-awesome-icon :icon="['fas', 'lock']" />
                                                 </span>
                                             </div>
                                             <invalid :message="errors[0]" v-if="errors"></invalid>
-                                        </validation-provider>
-                                    </div>
+                                        </div>
+                                    </validation-provider>
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="checkbox icheck">
@@ -74,6 +74,10 @@
                 title: process.env.MIX_APP_SLUG,
                 username: null,
                 password: null,
+                state: {
+                    type: null,
+                    message: null
+                },
                 errors: []
             }
         },
@@ -83,11 +87,16 @@
                 axios.post('/login', {
                     username: this.username,
                     password: this.password,
-                }).then(reponse => {
+                }).then(response => {
                     console.log('successful');
+                    this.state = {
+                        type: 'success',
+                        message: '登录成功，欢迎使用本系统'
+                    };
                 }).catch(error => {
-                    if (error.reponse.status == 422) {
-                        this.errors = error.reponse.data.errors;
+                    console.log(error);
+                    if (error.response.status == 422) {
+                        this.errors = error.response.data.errors;
                     }
                 })
             }

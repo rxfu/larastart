@@ -83,6 +83,10 @@ __webpack_require__.r(__webpack_exports__);
       title: "LaraStart",
       username: null,
       password: null,
+      state: {
+        type: null,
+        message: null
+      },
       errors: []
     };
   },
@@ -93,11 +97,17 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/login', {
         username: this.username,
         password: this.password
-      }).then(function (reponse) {
+      }).then(function (response) {
         console.log('successful');
+        _this.state = {
+          type: 'success',
+          message: '登录成功，欢迎使用本系统'
+        };
       })["catch"](function (error) {
-        if (error.reponse.status == 422) {
-          _this.errors = error.reponse.data.errors;
+        console.log(error);
+
+        if (error.response.status == 422) {
+          _this.errors = error.response.data.errors;
         }
       });
     }
@@ -183,7 +193,9 @@ var render = function() {
               "div",
               { staticClass: "login-box" },
               [
-                _c("alert"),
+                _vm.state.message
+                  ? _c("alert", { attrs: { state: _vm.state } })
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "card" }, [
                   _c("div", { staticClass: "card-body login-card-body" }, [
@@ -203,18 +215,18 @@ var render = function() {
                         }
                       },
                       [
-                        _c(
-                          "div",
-                          { staticClass: "input-group mb-3" },
-                          [
-                            _c("validation-provider", {
-                              attrs: { rules: "required" },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var errors = ref.errors
-                                    return [
+                        _c("validation-provider", {
+                          attrs: { rules: "required", slim: "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(ref) {
+                                var errors = ref.errors
+                                return [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group mb-3" },
+                                    [
                                       _c("input", {
                                         directives: [
                                           {
@@ -233,7 +245,6 @@ var render = function() {
                                           id: "username",
                                           name: "username",
                                           placeholder: "用户名",
-                                          required: "",
                                           autofocus: ""
                                         },
                                         domProps: { value: _vm.username },
@@ -269,27 +280,27 @@ var render = function() {
                                             attrs: { message: errors[0] }
                                           })
                                         : _vm._e()
-                                    ]
-                                  }
-                                }
-                              ])
-                            })
-                          ],
-                          1
-                        ),
+                                    ],
+                                    1
+                                  )
+                                ]
+                              }
+                            }
+                          ])
+                        }),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "input-group mb-3" },
-                          [
-                            _c("validation-provider", {
-                              attrs: { rules: "required|min:8" },
-                              scopedSlots: _vm._u([
-                                {
-                                  key: "default",
-                                  fn: function(ref) {
-                                    var errors = ref.errors
-                                    return [
+                        _c("validation-provider", {
+                          attrs: { rules: "required|min:8", slim: "" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(ref) {
+                                var errors = ref.errors
+                                return [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group mb-3" },
+                                    [
                                       _c("input", {
                                         directives: [
                                           {
@@ -307,8 +318,7 @@ var render = function() {
                                           type: "password",
                                           id: "password",
                                           name: "password",
-                                          placeholder: "密码",
-                                          required: ""
+                                          placeholder: "密码"
                                         },
                                         domProps: { value: _vm.password },
                                         on: {
@@ -343,17 +353,18 @@ var render = function() {
                                             attrs: { message: errors[0] }
                                           })
                                         : _vm._e()
-                                    ]
-                                  }
-                                }
-                              ])
-                            })
-                          ],
-                          1
-                        ),
+                                    ],
+                                    1
+                                  )
+                                ]
+                              }
+                            }
+                          ])
+                        }),
                         _vm._v(" "),
                         _vm._m(0)
-                      ]
+                      ],
+                      1
                     )
                   ])
                 ])
