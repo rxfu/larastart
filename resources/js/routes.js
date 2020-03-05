@@ -1,13 +1,13 @@
 export default [{
     path: '/',
-    component: resolve => require(['./layouts/Layout.vue'], resolve),
+    component: resolve => require(['./pages/Layout.vue'], resolve),
     meta: {
         bodyClass: 'sidebar-mini'
     },
     children: [{
         path: '/dashboard',
         name: 'Dashboard',
-        component: resolve => require(['./views/home/Dashboard.vue'], resolve),
+        component: resolve => require(['./pages/home/Dashboard.vue'], resolve),
         meta: {
             title: '首页'
         }
@@ -15,7 +15,7 @@ export default [{
 }, {
     path: '/signin',
     name: 'Signin',
-    component: resolve => require(['./views/auth/Signin.vue'], resolve),
+    component: resolve => require(['./pages/auth/Signin.vue'], resolve),
     meta: {
         title: '登录',
         bodyClass: 'layout-top-nav'
