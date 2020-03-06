@@ -74,7 +74,11 @@ router.beforeEach((to, from, next) => {
 
     vueBodyClass.guard(to, next);
 
-    next();
+    if (to.name !== 'Login' && !to.meta.isAuthenticated) {
+        next({ name: 'Login' });
+    } else {
+        next();
+    }
 });
 
 const app = new Vue({

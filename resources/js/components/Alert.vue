@@ -1,11 +1,11 @@
 <template>
     <!-- Alert -->
-    <div class="alert alert-dismissible" :class="tip.class">
+    <div class="alert alert-dismissible" :class="alert.class">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <h5>
-            <font-awesome-icon :icon="['fas', tip.icon]" class="icon" /> {{ tip.title }}！
+            <font-awesome-icon :icon="['fas', alert.icon]" class="icon" /> {{ alert.title }}！
         </h5>
-        {{ state.message }}
+        {{ prompt.message }}
     </div>
 </template>
 
@@ -13,13 +13,13 @@
 export default {
     name: 'Alert',
 
-    props: [ 'state' ],
+    props: [ 'prompt' ],
 
     computed: {
-        tip: function() {
+        alert: function() {
             var data = {};
 
-            switch (this.state.type) {
+            switch (this.prompt.type) {
                 case 'error':
                     data = {
                         'class': 'alert-danger',

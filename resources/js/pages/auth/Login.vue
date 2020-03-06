@@ -9,7 +9,7 @@
                     <!-- Login box -->
                     <div class="login-box">
                         <!-- Alert -->
-                        <alert v-if="state.message" :state="state"></alert>
+                        <alert v-if="prompt.message" :prompt="prompt"></alert>
 
                         <!-- Login card -->
                         <div class="card">
@@ -75,7 +75,7 @@
             title: process.env.MIX_APP_SLUG,
             username: null,
             password: null,
-            state: {
+            prompt: {
                 type: null,
                 message: null
             },
@@ -90,7 +90,7 @@
                 }).then(response => {
                     console.log('successful');
                     console.log(response);
-                    this.state = {
+                    this.prompt = {
                         type: 'success',
                         message: '登录成功，欢迎使用本系统'
                     };

@@ -11857,12 +11857,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
-  props: ['state'],
+  props: ['prompt'],
   computed: {
-    tip: function tip() {
+    alert: function alert() {
       var data = {};
 
-      switch (this.state.type) {
+      switch (this.prompt.type) {
         case 'error':
           data = {
             'class': 'alert-danger',
@@ -62278,7 +62278,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "alert alert-dismissible", class: _vm.tip.class },
+    { staticClass: "alert alert-dismissible", class: _vm.alert.class },
     [
       _c(
         "button",
@@ -62298,13 +62298,13 @@ var render = function() {
         [
           _c("font-awesome-icon", {
             staticClass: "icon",
-            attrs: { icon: ["fas", _vm.tip.icon] }
+            attrs: { icon: ["fas", _vm.alert.icon] }
           }),
-          _vm._v(" " + _vm._s(_vm.tip.title) + "！\n    ")
+          _vm._v(" " + _vm._s(_vm.alert.title) + "！\n    ")
         ],
         1
       ),
-      _vm._v("\n    " + _vm._s(_vm.state.message) + "\n")
+      _vm._v("\n    " + _vm._s(_vm.prompt.message) + "\n")
     ]
   )
 }
@@ -79032,7 +79032,14 @@ router.beforeEach(function (to, from, next) {
   var title = to.meta.title || 'Home';
   document.title = title + ' | ' + "Laradmin Start Template";
   vueBodyClass.guard(to, next);
-  next();
+
+  if (to.name !== 'Login' && !to.meta.isAuthenticated) {
+    next({
+      name: 'Login'
+    });
+  } else {
+    next();
+  }
 });
 var app = new Vue({
   router: router,
@@ -79554,7 +79561,8 @@ __webpack_require__.r(__webpack_exports__);
     return __webpack_require__.e(/*! AMD require */ 1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/Layout.vue */ "./resources/js/pages/Layout.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
   meta: {
-    bodyClass: 'sidebar-mini'
+    bodyClass: 'sidebar-mini',
+    isAuthenticated: false
   },
   children: [{
     path: '/dashboard',
@@ -79563,14 +79571,15 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! AMD require */ 2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/home/Dashboard.vue */ "./resources/js/pages/home/Dashboard.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: {
-      title: '首页'
+      title: '首页',
+      isAuthenticated: false
     }
   }]
 }, {
-  path: '/signin',
-  name: 'Signin',
+  path: '/login',
+  name: 'Login',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/auth/Signin.vue */ "./resources/js/pages/auth/Signin.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return __webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
   meta: {
     title: '登录',

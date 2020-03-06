@@ -48,8 +48,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Layout'
+  name: 'Layout',
+  data: function data() {
+    return {
+      prompt: {
+        type: null,
+        message: null
+      }
+    };
+  }
 });
 
 /***/ }),
@@ -91,7 +100,9 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("alert"),
+          _vm.prompt.message
+            ? _c("alert", { attrs: { prompt: _vm.prompt } })
+            : _vm._e(),
           _vm._v(" "),
           _c("section", { staticClass: "content" }, [
             _c("div", { staticClass: "content-fluid" }, [_c("router-view")], 1)

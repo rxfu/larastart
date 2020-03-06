@@ -22,7 +22,8 @@
                 </div><!-- /.container-fluid -->
             </section>
 
-            <alert></alert>
+            <!-- Alert -->
+            <alert v-if="prompt.message" :prompt="prompt"></alert>
 
             <!-- Main content -->
             <section class="content">
@@ -39,6 +40,13 @@
 
 <script>
 export default {
-    name: 'Layout'
+    name: 'Layout',
+
+    data: () => ({
+        prompt: {
+            type: null,
+            message: null
+        }
+    })
 }
 </script>

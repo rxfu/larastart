@@ -3,20 +3,22 @@ export default [{
     name: 'Home',
     component: resolve => require(['./pages/Layout.vue'], resolve),
     meta: {
-        bodyClass: 'sidebar-mini'
+        bodyClass: 'sidebar-mini',
+        isAuthenticated: false
     },
     children: [{
         path: '/dashboard',
         name: 'Dashboard',
         component: resolve => require(['./pages/home/Dashboard.vue'], resolve),
         meta: {
-            title: '首页'
+            title: '首页',
+            isAuthenticated: false
         }
     }]
 }, {
-    path: '/signin',
-    name: 'Signin',
-    component: resolve => require(['./pages/auth/Signin.vue'], resolve),
+    path: '/login',
+    name: 'Login',
+    component: resolve => require(['./pages/auth/Login.vue'], resolve),
     meta: {
         title: '登录',
         bodyClass: 'layout-top-nav'
