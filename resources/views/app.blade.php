@@ -22,7 +22,7 @@
     <!-- Custom styles -->
     @stack('styles')
 </head>
-<body class="hold-transition">
+<body class="hold-transition layout-footer-fixed">
     <div id="app">
         <router-view></router-view>
     </div>

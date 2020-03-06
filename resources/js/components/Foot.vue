@@ -1,11 +1,12 @@
 <template>
+    <!-- Main footer -->
     <footer class="main-footer">
         <!-- To the right -->
         <div class="float-right d-none d-sm-inline">
             欢迎使用{{ appSlug }}
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; {{ year }} <a href="https://adminlte.io">{{ appName }}</a>.</strong> 保留所有权利.
+        <strong>Copyright &copy; {{ year }} <router-link :to="{ name: 'Home' }">{{ appName }}</router-link>.</strong> 保留所有权利.
     </footer>
 </template>
 
@@ -15,7 +16,7 @@ export default {
 
     data: function() {
         return {
-            year: new Date().getFullYear(),
+            year: '2019 ~ ' + new Date().getFullYear(),
             appName: process.env.MIX_APP_NAME,
             appSlug: process.env.MIX_APP_SLUG
         }

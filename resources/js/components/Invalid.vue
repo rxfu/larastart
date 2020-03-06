@@ -1,4 +1,5 @@
 <template>
+    <!-- Validation error message -->
     <div class="invalid-feedback" role="alert">
         <strong>{{ message }}</strong>
     </div>

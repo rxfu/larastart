@@ -1,5 +1,6 @@
 export default [{
     path: '/',
+    name: 'Home',
     component: resolve => require(['./pages/Layout.vue'], resolve),
     meta: {
         bodyClass: 'sidebar-mini'

@@ -1,4 +1,5 @@
 <template>
+    <!-- Alert -->
     <div class="alert alert-dismissible" :class="tip.class">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <h5>
