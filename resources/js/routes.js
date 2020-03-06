@@ -23,4 +23,16 @@ export default [{
         title: '登录',
         bodyClass: 'layout-top-nav'
     }
+}, {
+    path: '/404',
+    name: '404',
+    component: resolve => require(['./pages/error/404.vue'], resolve),
+    meta: {
+        title: '页面未找到',
+        bodyClass: 'layout-top-nav',
+        isAuthenticated: true
+    }
+}, {
+    path: '*',
+    redirect: '/404'
 }];
