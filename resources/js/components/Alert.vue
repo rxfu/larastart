@@ -2,7 +2,7 @@
     <div class="alert alert-dismissible" :class="tip.class">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <h5>
-            <i class="icon fas" :class="tip.icon"></i> {{ tip.title }}！
+            <font-awesome-icon :icon="['fas', tip.icon]" class="icon" /> {{ tip.title }}！
         </h5>
         {{ state.message }}
     </div>
@@ -22,7 +22,7 @@ export default {
                 case 'error':
                     data = {
                         'class': 'alert-danger',
-                        'icon': 'fa-ban',
+                        'icon': 'ban',
                         'title': '错误'
                     };
                     break;
@@ -30,7 +30,7 @@ export default {
                 case 'info':
                     data = {
                         'class': 'alert-info',
-                        'icon': 'fa-info',
+                        'icon': 'info',
                         'title': '信息'
                     };
                     break;
@@ -38,7 +38,7 @@ export default {
                 case 'warning':
                     data = {
                         'class': 'alert-warning',
-                        'icon': 'fa-warning',
+                        'icon': 'warning',
                         'title': '警告'
                     };
                     break;
@@ -46,7 +46,7 @@ export default {
                 case 'success':
                     data = {
                         'class': 'alert-success',
-                        'icon': 'fa-check',
+                        'icon': 'check',
                         'title': '成功'
                     };
                     break;

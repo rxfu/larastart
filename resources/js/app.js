@@ -43,16 +43,16 @@ localize('zh_CN', zh_CN);
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./components/', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('validation-provider', ValidationProvider);
 Vue.component('validation-observer', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.component('navigation', require('./components/Navigation.vue').default);
-Vue.component('foot', require('./components/Foot.vue').default);
-Vue.component('alert', require('./components/Alert.vue').default);
-Vue.component('invalid', require('./components/Invalid.vue').default);
+// Vue.component('navigation', require('./components/Navigation.vue').default);
+// Vue.component('foot', require('./components/Foot.vue').default);
+// Vue.component('alert', require('./components/Alert.vue').default);
+// Vue.component('invalid', require('./components/Invalid.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

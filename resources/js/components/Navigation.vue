@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: 'Navigation',
+    name: 'Header',
 
     data: function() {
         return {

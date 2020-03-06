@@ -11865,7 +11865,7 @@ __webpack_require__.r(__webpack_exports__);
         case 'error':
           data = {
             'class': 'alert-danger',
-            'icon': 'fa-ban',
+            'icon': 'ban',
             'title': '错误'
           };
           break;
@@ -11873,7 +11873,7 @@ __webpack_require__.r(__webpack_exports__);
         case 'info':
           data = {
             'class': 'alert-info',
-            'icon': 'fa-info',
+            'icon': 'info',
             'title': '信息'
           };
           break;
@@ -11881,7 +11881,7 @@ __webpack_require__.r(__webpack_exports__);
         case 'warning':
           data = {
             'class': 'alert-warning',
-            'icon': 'fa-warning',
+            'icon': 'warning',
             'title': '警告'
           };
           break;
@@ -11889,7 +11889,7 @@ __webpack_require__.r(__webpack_exports__);
         case 'success':
           data = {
             'class': 'alert-success',
-            'icon': 'fa-check',
+            'icon': 'check',
             'title': '成功'
           };
           break;
@@ -11999,7 +11999,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Navigation',
+  name: 'Header',
   data: function data() {
     return {
       title: "Laradmin Start Template"
@@ -62132,10 +62132,17 @@ var render = function() {
         [_vm._v("×")]
       ),
       _vm._v(" "),
-      _c("h5", [
-        _c("i", { staticClass: "icon fas", class: _vm.tip.icon }),
-        _vm._v(" " + _vm._s(_vm.tip.title) + "！\n    ")
-      ]),
+      _c(
+        "h5",
+        [
+          _c("font-awesome-icon", {
+            staticClass: "icon",
+            attrs: { icon: ["fas", _vm.tip.icon] }
+          }),
+          _vm._v(" " + _vm._s(_vm.tip.title) + "！\n    ")
+        ],
+        1
+      ),
       _vm._v("\n    " + _vm._s(_vm.state.message) + "\n")
     ]
   )
@@ -78522,16 +78529,19 @@ Object(vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_5__["loc
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+var files = __webpack_require__("./resources/js/components sync recursive \\.vue$/");
+
+files.keys().map(function (key) {
+  return Vue.component(key.split('/').pop().split('.')[0], files(key)["default"]);
+});
 Vue.component('validation-provider', vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_5__["ValidationProvider"]);
 Vue.component('validation-observer', vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_5__["ValidationObserver"]);
-Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]);
-Vue.component('navigation', __webpack_require__(/*! ./components/Navigation.vue */ "./resources/js/components/Navigation.vue")["default"]);
-Vue.component('foot', __webpack_require__(/*! ./components/Foot.vue */ "./resources/js/components/Foot.vue")["default"]);
-Vue.component('alert', __webpack_require__(/*! ./components/Alert.vue */ "./resources/js/components/Alert.vue")["default"]);
-Vue.component('invalid', __webpack_require__(/*! ./components/Invalid.vue */ "./resources/js/components/Invalid.vue")["default"]);
+Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeIcon"]); // Vue.component('navigation', require('./components/Navigation.vue').default);
+// Vue.component('foot', require('./components/Foot.vue').default);
+// Vue.component('alert', require('./components/Alert.vue').default);
+// Vue.component('invalid', require('./components/Invalid.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -78599,6 +78609,42 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components sync recursive \\.vue$/":
+/*!**********************************************!*\
+  !*** ./resources/js/components sync \.vue$/ ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./Alert.vue": "./resources/js/components/Alert.vue",
+	"./Foot.vue": "./resources/js/components/Foot.vue",
+	"./Invalid.vue": "./resources/js/components/Invalid.vue",
+	"./Navigation.vue": "./resources/js/components/Navigation.vue"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/js/components sync recursive \\.vue$/";
 
 /***/ }),
 
