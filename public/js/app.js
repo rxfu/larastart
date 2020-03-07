@@ -79007,7 +79007,7 @@ Object(vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_5__["loc
 var files = __webpack_require__("./resources/js/components sync recursive \\.vue$/");
 
 files.keys().map(function (key) {
-  return Vue.component(key.split('/').pop().split('.')[0], files(key)["default"]);
+  return Vue.component(key.split('/').pop().split('.')[0].toLowerCase(), files(key)["default"]);
 });
 Vue.component('validation-provider', vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_5__["ValidationProvider"]);
 Vue.component('validation-observer', vee_validate_dist_vee_validate_full_esm__WEBPACK_IMPORTED_MODULE_5__["ValidationObserver"]);
@@ -79558,7 +79558,7 @@ __webpack_require__.r(__webpack_exports__);
   path: '/',
   name: 'Home',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/Layout.vue */ "./resources/js/pages/Layout.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return __webpack_require__.e(/*! AMD require */ 4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/layouts/App.vue */ "./resources/js/pages/layouts/App.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
   meta: {
     bodyClass: 'sidebar-mini',
@@ -79574,31 +79574,40 @@ __webpack_require__.r(__webpack_exports__);
       title: '首页',
       isAuthenticated: false
     }
+  }, {
+    path: '/404',
+    name: '404',
+    component: function component(resolve) {
+      return __webpack_require__.e(/*! AMD require */ 2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/error/404.vue */ "./resources/js/pages/error/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    },
+    meta: {
+      title: '页面未找到',
+      isAuthenticated: false
+    }
   }]
 }, {
-  path: '/login',
-  name: 'Login',
+  path: '/auth',
+  name: 'Auth',
   component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    return __webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/layouts/Page.vue */ "./resources/js/pages/layouts/Page.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
   meta: {
-    title: '登录',
-    bodyClass: 'layout-top-nav'
-  }
-}, {
-  path: '/404',
-  name: '404',
-  component: function component(resolve) {
-    return __webpack_require__.e(/*! AMD require */ 2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/error/404.vue */ "./resources/js/pages/error/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
-  },
-  meta: {
-    title: '页面未找到',
     bodyClass: 'layout-top-nav',
-    isAuthenticated: true
-  }
+    isAuthenticated: false
+  },
+  children: [{
+    path: '/login',
+    name: 'Login',
+    component: function component(resolve) {
+      return __webpack_require__.e(/*! AMD require */ 1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
+    },
+    meta: {
+      title: '登录'
+    }
+  }]
 }, {
   path: '*',
-  redirect: '/404'
+  redirect: '/auth/login'
 }]);
 
 /***/ }),

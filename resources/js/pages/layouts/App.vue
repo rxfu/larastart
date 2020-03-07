@@ -40,7 +40,7 @@
 
 <script>
 export default {
-    name: 'Layout',
+    name: 'App',
 
     data: () => ({
         prompt: {

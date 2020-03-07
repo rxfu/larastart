@@ -1,86 +1,58 @@
 <template>
-    <div class="wrapper">
-        <!-- Navigation -->
-        <navigation></navigation>
-
-        <div class="content-wrapper">
-            <div class="content">
-                <div class="login-page">
-                    <!-- Login box -->
-                    <div class="login-box">
-                        <!-- Alert -->
-                        <alert v-if="prompt.message" :prompt="prompt"></alert>
-
-                        <!-- Login card -->
-                        <div class="card">
-                            <div class="card-body login-card-body">
-                                <p class="login-box-msg">- 登录 -</p>
-
-                                <validation-observer v-slot="{ invalid } ">
-                                    <form method="post" @submit.prevent="onSubmit" autocomplete="off">
-                                        <validation-provider rules="required" v-slot="{ errors }" slim>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="用户名" required autofocus>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <font-awesome-icon :icon="['fas', 'user']" />
-                                                    </span>
-                                                </div>
-                                                <invalid :message="errors[0]"></invalid>
-                                            </div>
-                                        </validation-provider>
-                                        <validation-provider rules="required" v-slot="{ errors }" slim>
-                                            <div class="input-group mb-3">
-                                                <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="密码" required>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">
-                                                        <font-awesome-icon :icon="['fas', 'lock']" />
-                                                    </span>
-                                                </div>
-                                                <invalid :message="errors[0]"></invalid>
-                                            </div>
-                                        </validation-provider>
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <div class="checkbox icheck">
-                                                    <label>
-                                                        <input type="checkbox" value="1" name="remember_me"> 记住我
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-4">
-                                                <button type="submit" class="btn btn-primary btn-block" :disabled="invalid">登录</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </validation-observer>
-                            </div>
-                        </div>
+    <validation-observer v-slot="{ invalid } ">
+        <form method="post" @submit.prevent="onSubmit" autocomplete="off">
+            <validation-provider rules="required" v-slot="{ errors }" slim>
+                <div class="input-group mb-3">
+                    <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="用户名" required autofocus>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <font-awesome-icon :icon="['fas', 'user']" />
+                        </span>
+                    </div>
+                    <invalid :message="errors[0]"></invalid>
+                </div>
+            </validation-provider>
+            <validation-provider rules="required" v-slot="{ errors }" slim>
+                <div class="input-group mb-3">
+                    <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="密码" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <font-awesome-icon :icon="['fas', 'lock']" />
+                        </span>
+                    </div>
+                    <invalid :message="errors[0]"></invalid>
+                </div>
+            </validation-provider>
+            <div class="row">
+                <div class="col-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox" value="1" name="remember_me"> 记住我
+                        </label>
                     </div>
                 </div>
+
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block" :disabled="invalid">登录</button>
+                </div>
             </div>
-        </div>
-        
-        <!-- Main Footer -->
-        <foot></foot>
-    </div>
+        </form>
+    </validation-observer>
 </template>
 
 <script>
     export default {
-        name: 'Signin',
+        name: 'Login',
 
         data: () => ({
-            title: process.env.MIX_APP_SLUG,
             username: null,
             password: null,
-            prompt: {
-                type: null,
-                message: null
-            },
             errors: []
         }),
+
+        mounted() {
+            this.$parent.title = '- 登录 -';
+        },
 
         methods: {
             onSubmit() {
@@ -104,9 +76,3 @@
         }
     }
 </script>
-
-<style scoped>
-.login-page {
-    height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px)) !important;
-}
-</style>
