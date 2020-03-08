@@ -49,12 +49,13 @@ __webpack_require__.r(__webpack_exports__);
       prompt: {
         type: null,
         message: null
-      },
-      title: null
+      }
     };
   },
-  created: function created() {
-    this.title = this.$store.getters.title;
+  computed: {
+    title: function title() {
+      return this.$store.getters.title;
+    }
   }
 });
 

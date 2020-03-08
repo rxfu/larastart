@@ -1,5 +1,7 @@
+import * as types from './mutation-types';
+
 export default {
-    SET_TITLE(state, title) {
-        state.title = title;
+    [types.UPDATE_TITLE](state, title) {
+        Object.assign(state, title);
     }
 }

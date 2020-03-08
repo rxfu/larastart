@@ -45,15 +45,16 @@
         name: 'Login',
 
         data: () => ({
+            title: '- 登录 -',
             username: null,
             password: null,
             errors: []
         }),
 
         mounted() {
-            // this.$parent.title = '- 登录 -';
-            this.$store.dispatch('setTitle', 'jdfiasfassdfewaj登录系统fdafadf');
-            console.log(this.$store.getters.title);
+            this.$store.dispatch('setTitle', {
+               title: this.title 
+            });
         },
 
         methods: {

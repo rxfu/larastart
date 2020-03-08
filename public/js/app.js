@@ -79624,10 +79624,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mutation-types */ "./resources/js/store/mutation-types.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   setTitle: function setTitle(_ref, title) {
     var commit = _ref.commit;
-    commit('SET_TITLE', title);
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], title);
   }
 });
 
@@ -79713,6 +79715,24 @@ webpackEmptyContext.id = "./resources/js/store/modules sync recursive .*\\.js$/"
 
 /***/ }),
 
+/***/ "./resources/js/store/mutation-types.js":
+/*!**********************************************!*\
+  !*** ./resources/js/store/mutation-types.js ***!
+  \**********************************************/
+/*! exports provided: LOGIN, LOGOUT, UPDATE_TITLE */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT", function() { return LOGOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TITLE", function() { return UPDATE_TITLE; });
+var LOGIN = 'LOGIN';
+var LOGOUT = 'LOGOUT';
+var UPDATE_TITLE = 'UPDATE_TITLE';
+
+/***/ }),
+
 /***/ "./resources/js/store/mutations.js":
 /*!*****************************************!*\
   !*** ./resources/js/store/mutations.js ***!
@@ -79722,11 +79742,13 @@ webpackEmptyContext.id = "./resources/js/store/modules sync recursive .*\\.js$/"
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  SET_TITLE: function SET_TITLE(state, title) {
-    state.title = title;
-  }
-});
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mutation-types */ "./resources/js/store/mutation-types.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({}, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], function (state, title) {
+  Object.assign(state, title);
+}));
 
 /***/ }),
 
@@ -79740,7 +79762,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  title: '登录'
+  title: ''
 });
 
 /***/ }),

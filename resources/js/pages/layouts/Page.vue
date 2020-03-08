@@ -39,12 +39,13 @@ export default {
         prompt: {
             type: null,
             message: null
-        },
-        title: null
+        }
     }),
 
-    created() {
-        this.title = this.$store.getters.title;
+    computed: {
+        title: function() {
+            return this.$store.getters.title;
+        }
     }
 }
 </script>

@@ -55,15 +55,16 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Login',
   data: function data() {
     return {
+      title: '- 登录 -',
       username: null,
       password: null,
       errors: []
     };
   },
   mounted: function mounted() {
-    // this.$parent.title = '- 登录 -';
-    this.$store.dispatch('setTitle', 'jdfiasfassdfewaj登录系统fdafadf');
-    console.log(this.$store.getters.title);
+    this.$store.dispatch('setTitle', {
+      title: this.title
+    });
   },
   methods: {
     onSubmit: function onSubmit() {
