@@ -55,10 +55,8 @@ var _this = undefined;
       title: null
     };
   },
-  methods: {
-    setTitle: function setTitle(title) {
-      _this.title = title;
-    }
+  created: function created() {
+    title = _this.$store.getters.title;
   }
 });
 
@@ -132,7 +130,7 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
-      _c("navigation"),
+      _c("navigation", { attrs: { login: true } }),
       _vm._v(" "),
       _c("div", { staticClass: "content-wrapper" }, [
         _c("div", { staticClass: "content" }, [

@@ -51,7 +51,9 @@
         }),
 
         mounted() {
-            this.$parent.title = '- 登录 -';
+            // this.$parent.title = '- 登录 -';
+            this.$store.dispatch('setTitle', 'jdfiasfassdfewaj登录系统fdafadf');
+            console.log(this.$store.getters.title);
         },
 
         methods: {

@@ -1,7 +1,7 @@
 <template>
     <!-- Site wrapper -->
     <div class="wrapper">
-        <navigation></navigation>
+        <navigation :login="true"></navigation>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -43,10 +43,8 @@ export default {
         title: null
     }),
 
-    methods: {
-        setTitle: title => {
-            this.title = title;
-        }
+    created: () => {
+        title = this.$store.getters.title;
     }
 }
 </script>
