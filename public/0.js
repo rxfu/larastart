@@ -9,8 +9,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _this = undefined;
-
 //
 //
 //
@@ -56,7 +54,7 @@ var _this = undefined;
     };
   },
   created: function created() {
-    title = _this.$store.getters.title;
+    this.title = this.$store.getters.title;
   }
 });
 

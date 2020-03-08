@@ -43,8 +43,8 @@ export default {
         title: null
     }),
 
-    created: () => {
-        title = this.$store.getters.title;
+    created() {
+        this.title = this.$store.getters.title;
     }
 }
 </script>
