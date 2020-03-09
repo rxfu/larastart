@@ -74,7 +74,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: this.title
     });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'promptMessage']), {
     onSubmit: function onSubmit() {
       var _this = this;
 
@@ -84,10 +84,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (response) {
         console.log('successful');
         console.log(response);
-        _this.prompt = {
-          type: 'success',
-          message: '登录成功，欢迎使用本系统'
-        };
+
+        _this.promptMessage({
+          prompt: {
+            type: 'success',
+            message: '登录成功，欢迎使用本系统'
+          }
+        });
       })["catch"](function (error) {
         console.log(error);
 

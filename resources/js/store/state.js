@@ -1,3 +1,7 @@
 export default {
-    title: ''
+    title: null,
+    prompt: {
+        type: null,
+        message: null
+    }
 }

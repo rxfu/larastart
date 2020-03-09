@@ -79630,6 +79630,10 @@ __webpack_require__.r(__webpack_exports__);
   setTitle: function setTitle(_ref, title) {
     var commit = _ref.commit;
     commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], title);
+  },
+  promptMessage: function promptMessage(_ref2, prompt) {
+    var commit = _ref2.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["PROMPT_MESSAGE"], prompt);
   }
 });
 
@@ -79644,11 +79648,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./resources/js/store/state.js");
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   title: function title(state) {
     return state.title;
+  },
+  prompt: function prompt(state) {
+    return state.prompt;
   }
 });
 
@@ -79719,7 +79724,7 @@ webpackEmptyContext.id = "./resources/js/store/modules sync recursive .*\\.js$/"
 /*!**********************************************!*\
   !*** ./resources/js/store/mutation-types.js ***!
   \**********************************************/
-/*! exports provided: LOGIN, LOGOUT, UPDATE_TITLE */
+/*! exports provided: LOGIN, LOGOUT, UPDATE_TITLE, PROMPT_MESSAGE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79727,9 +79732,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT", function() { return LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TITLE", function() { return UPDATE_TITLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROMPT_MESSAGE", function() { return PROMPT_MESSAGE; });
 var LOGIN = 'LOGIN';
 var LOGOUT = 'LOGOUT';
 var UPDATE_TITLE = 'UPDATE_TITLE';
+var PROMPT_MESSAGE = 'PROMPT_MESSAGE';
 
 /***/ }),
 
@@ -79743,12 +79750,16 @@ var UPDATE_TITLE = 'UPDATE_TITLE';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mutation-types */ "./resources/js/store/mutation-types.js");
+var _types$UPDATE_TITLE$t;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({}, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], function (state, title) {
+/* harmony default export */ __webpack_exports__["default"] = (_types$UPDATE_TITLE$t = {}, _defineProperty(_types$UPDATE_TITLE$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], function (state, title) {
   Object.assign(state, title);
-}));
+}), _defineProperty(_types$UPDATE_TITLE$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["PROMPT_MESSAGE"], function (state, prompt) {
+  Object.assign(state, prompt);
+}), _types$UPDATE_TITLE$t);
 
 /***/ }),
 
@@ -79762,7 +79773,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  title: ''
+  title: null,
+  prompt: {
+    type: null,
+    message: null
+  }
 });
 
 /***/ }),

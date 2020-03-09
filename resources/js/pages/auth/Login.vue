@@ -59,7 +59,8 @@ export default {
 
     methods: {
         ...mapActions([
-            'setTitle'
+            'setTitle',
+            'promptMessage'
         ]),
 
         onSubmit() {
@@ -69,10 +70,12 @@ export default {
             }).then(response => {
                 console.log('successful');
                 console.log(response);
-                this.prompt = {
-                    type: 'success',
-                    message: '登录成功，欢迎使用本系统'
-                };
+                this.promptMessage({
+                    prompt: {
+                        type: 'success',
+                        message: '登录成功，欢迎使用本系统'
+                    }
+                });
             }).catch(error => {
                 console.log(error);
                 if (error.response.status == 422) {

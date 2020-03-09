@@ -37,15 +37,8 @@ import { mapGetters } from 'vuex';
 export default {
     name: 'App',
 
-    data: () => ({
-        prompt: {
-            type: null,
-            message: null
-        }
-    }),
-
     computed: {
-        ...mapGetters(['title'])
+        ...mapGetters(['title', 'prompt'])
     }
 }
 </script>

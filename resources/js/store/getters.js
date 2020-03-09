@@ -1,5 +1,4 @@
-import state from "./state"
-
 export default {
-    title: state => state.title
+    title: state => state.title,
+    prompt: state => state.prompt
 }
