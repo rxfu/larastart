@@ -151,7 +151,7 @@ var render = function() {
                         _vm._v(_vm._s(_vm.title))
                       ]),
                       _vm._v(" "),
-                      _c("router-view", { on: { title: _vm.setTitle } })
+                      _c("router-view")
                     ],
                     1
                   )

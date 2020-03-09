@@ -18,7 +18,7 @@
                             <div class="card-body login-card-body">
                                 <p class="login-box-msg">{{ title }}</p>
 
-                                <router-view @title="setTitle"></router-view>
+                                <router-view></router-view>
                             </div>
                         </div>
                     </div>
