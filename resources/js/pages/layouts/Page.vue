@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'App',
 
@@ -43,9 +45,7 @@ export default {
     }),
 
     computed: {
-        title: function() {
-            return this.$store.getters.title;
-        }
+        ...mapGetters(['title'])
     }
 }
 </script>

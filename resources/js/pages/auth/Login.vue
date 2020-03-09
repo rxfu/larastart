@@ -41,41 +41,45 @@
 </template>
 
 <script>
-    export default {
-        name: 'Login',
+import { mapActions } from 'vuex';
 
-        data: () => ({
-            title: '- 登录 -',
-            username: null,
-            password: null,
-            errors: []
-        }),
+export default {
+    name: 'Login',
 
-        mounted() {
-            this.$store.dispatch('setTitle', {
-               title: this.title 
-            });
-        },
+    data: () => ({
+        title: '- 登录 -',
+        username: null,
+        password: null,
+        errors: []
+    }),
 
-        methods: {
-            onSubmit() {
-                axios.post('/login', {
-                    username: this.username,
-                    password: this.password,
-                }).then(response => {
-                    console.log('successful');
-                    console.log(response);
-                    this.prompt = {
-                        type: 'success',
-                        message: '登录成功，欢迎使用本系统'
-                    };
-                }).catch(error => {
-                    console.log(error);
-                    if (error.response.status == 422) {
-                        this.errors = error.response.data.errors;
-                    }
-                })
-            }
+    mounted() {
+        this.setTitle({ title: this.title });
+    },
+
+    methods: {
+        ...mapActions([
+            'setTitle'
+        ]),
+
+        onSubmit() {
+            axios.post('/login', {
+                username: this.username,
+                password: this.password,
+            }).then(response => {
+                console.log('successful');
+                console.log(response);
+                this.prompt = {
+                    type: 'success',
+                    message: '登录成功，欢迎使用本系统'
+                };
+            }).catch(error => {
+                console.log(error);
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                }
+            })
         }
     }
+}
 </script>
