@@ -12,6 +12,7 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
+import Axios from 'axios';
 import VueBodyClass from 'vue-body-class';
 import { ValidationProvider, ValidationObserver, localize, extend } from 'vee-validate/dist/vee-validate.full.esm';
 import zh_CN from 'vee-validate/dist/locale/zh_CN.json';
@@ -50,10 +51,6 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0].toLower
 Vue.component('validation-provider', ValidationProvider);
 Vue.component('validation-observer', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-// Vue.component('navigation', require('./components/Navigation.vue').default);
-// Vue.component('foot', require('./components/Foot.vue').default);
-// Vue.component('alert', require('./components/Alert.vue').default);
-// Vue.component('invalid', require('./components/Invalid.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -77,6 +74,18 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
+});
+
+Axios.interceptors.request.use(function (config) {
+    store.dispatch('showLoading');
+
+    return config;
+});
+
+Axios.interceptors.response.use(function (config) {
+    store.dispatch('hideLoading');
+    
+    return config;
 });
 
 const app = new Vue({

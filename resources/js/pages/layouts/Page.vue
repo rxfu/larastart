@@ -1,6 +1,8 @@
 <template>
     <!-- Site wrapper -->
     <div class="wrapper">
+        <loading v-if="loading"></loading>
+        
         <navigation :login="true"></navigation>
 
         <!-- Content Wrapper. Contains page content -->
@@ -38,7 +40,7 @@ export default {
     name: 'App',
 
     computed: {
-        ...mapGetters(['title', 'prompt'])
+        ...mapGetters(['loading', 'title', 'prompt'])
     }
 }
 </script>
