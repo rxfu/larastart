@@ -11,7 +11,6 @@ export default [{
         name: 'Dashboard',
         component: resolve => require(['./pages/home/Dashboard.vue'], resolve),
         meta: {
-            title: '首页',
             isAuthenticated: false
         }
     }, {
@@ -19,7 +18,6 @@ export default [{
         name: '404',
         component: resolve => require(['./pages/error/404.vue'], resolve),
         meta: {
-            title: '页面未找到',
             isAuthenticated: false
         }
     }]
@@ -35,9 +33,6 @@ export default [{
         path: '/login',
         name: 'Login',
         component: resolve => require(['./pages/auth/Login.vue'], resolve),
-        meta: {
-            title: '登录'
-        }
     }]
 }, {
     path: '*',

@@ -79031,8 +79031,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
 });
 var vueBodyClass = new vue_body_class__WEBPACK_IMPORTED_MODULE_4___default.a(_routes__WEBPACK_IMPORTED_MODULE_10__["default"]);
 router.beforeEach(function (to, from, next) {
-  var title = to.meta.title || 'Home';
-  document.title = title + ' | ' + "Laradmin Start Template";
   vueBodyClass.guard(to, next);
 
   if (to.name !== 'Login' && !to.meta.isAuthenticated) {
@@ -79574,7 +79572,6 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! AMD require */ 3).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/home/Dashboard.vue */ "./resources/js/pages/home/Dashboard.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: {
-      title: '首页',
       isAuthenticated: false
     }
   }, {
@@ -79584,7 +79581,6 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! AMD require */ 2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/error/404.vue */ "./resources/js/pages/error/404.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: {
-      title: '页面未找到',
       isAuthenticated: false
     }
   }]
@@ -79603,9 +79599,6 @@ __webpack_require__.r(__webpack_exports__);
     name: 'Login',
     component: function component(resolve) {
       return __webpack_require__.e(/*! AMD require */ 1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/auth/Login.vue */ "./resources/js/pages/auth/Login.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
-    },
-    meta: {
-      title: '登录'
     }
   }]
 }, {
@@ -79630,6 +79623,7 @@ __webpack_require__.r(__webpack_exports__);
   setTitle: function setTitle(_ref, title) {
     var commit = _ref.commit;
     commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], title);
+    document.title = (title.title || 'Home') + ' | ' + "Laradmin Start Template";
   },
   promptMessage: function promptMessage(_ref2, prompt) {
     var commit = _ref2.commit;

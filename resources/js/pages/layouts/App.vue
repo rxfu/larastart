@@ -12,7 +12,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Inline Charts</h1>
+                            <h1>{{ title }}</h1>
                         </div>
                         <div class="col-sm-6">
                             <!-- Breadcrumb -->
@@ -39,14 +39,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'App',
 
-    data: () => ({
-        prompt: {
-            type: null,
-            message: null
-        }
-    })
+    computed: {
+        ...mapGetters(['title', 'prompt'])
+    }
 }
 </script>

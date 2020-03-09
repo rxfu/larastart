@@ -70,9 +70,6 @@ const router = new VueRouter({
 const vueBodyClass = new VueBodyClass(routes);
 
 router.beforeEach((to, from, next) => {
-    var title = to.meta.title || 'Home';
-    document.title = title + ' | ' + process.env.MIX_APP_NAME;
-
     vueBodyClass.guard(to, next);
 
     if (to.name !== 'Login' && !to.meta.isAuthenticated) {

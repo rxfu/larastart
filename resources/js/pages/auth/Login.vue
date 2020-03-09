@@ -47,7 +47,7 @@ export default {
     name: 'Login',
 
     data: () => ({
-        title: '- 登录 -',
+        title: '登录',
         username: null,
         password: null,
         errors: []

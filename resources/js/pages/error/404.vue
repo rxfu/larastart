@@ -28,7 +28,23 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
-    name: 'Notfound'
+    name: 'Notfound',
+
+    data: () => ({
+        title: '页面未找到'
+    }),
+
+    mounted() {
+        this.setTitle({ title: this.title });
+    },
+
+    methods: {
+        ...mapActions([
+            'setTitle'
+        ])
+    }
 }
 </script>

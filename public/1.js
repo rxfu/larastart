@@ -63,7 +63,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: 'Login',
   data: function data() {
     return {
-      title: '- 登录 -',
+      title: '登录',
       username: null,
       password: null,
       errors: []
