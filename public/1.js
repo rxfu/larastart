@@ -74,10 +74,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: this.title
     });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'promptMessage']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'flashSuccess']), {
     onSubmit: function onSubmit() {
       var _this = this;
 
+      /* this.$store.dispatch('Login', {
+          username: this.username,
+          password: this.password,
+      }).then(() => {
+          this.$route.push({ name: 'Home'})
+      }).catch((error) => {
+          console.log(error.response);
+      }) */
       axios.post('/login', {
         username: this.username,
         password: this.password
@@ -85,12 +93,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log('successful');
         console.log(response);
 
-        _this.promptMessage({
-          prompt: {
-            type: 'success',
-            message: '登录成功，欢迎使用本系统'
-          }
-        });
+        _this.flashSuccess('登录成功，欢迎使用本系统');
       })["catch"](function (error) {
         console.log(error);
 

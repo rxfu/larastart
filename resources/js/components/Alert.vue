@@ -1,25 +1,27 @@
 <template>
     <!-- Alert -->
-    <div class="alert alert-dismissible" :class="alert.class">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <div id="alert" class="alert alert-dismissible" :class="alert.class">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" @click="flushMessage(index)">&times;</button>
         <h5>
             <font-awesome-icon :icon="['fas', alert.icon]" class="icon" /> {{ alert.title }}！
         </h5>
-        {{ prompt.message }}
+        {{ message.content }}
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: 'Alert',
 
-    props: [ 'prompt' ],
+    props: [ 'message', 'index' ],
 
     computed: {
         alert: function() {
             var data = {};
 
-            switch (this.prompt.type) {
+            switch (this.message.type) {
                 case 'error':
                     data = {
                         'class': 'alert-danger',
@@ -62,6 +64,16 @@ export default {
 
             return data;
         }
+    },
+
+    destroyed() {
+        this.flushMessage(this.index);
+    },
+
+    methods: {
+        ...mapActions([
+            'flushMessage'
+        ])
     }
 }
 </script>

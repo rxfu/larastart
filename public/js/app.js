@@ -11844,6 +11844,13 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -11855,14 +11862,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
-  props: ['prompt'],
+  props: ['message', 'index'],
   computed: {
     alert: function alert() {
       var data = {};
 
-      switch (this.prompt.type) {
+      switch (this.message.type) {
         case 'error':
           data = {
             'class': 'alert-danger',
@@ -11905,7 +11913,11 @@ __webpack_require__.r(__webpack_exports__);
 
       return data;
     }
-  }
+  },
+  destroyed: function destroyed() {
+    this.flushMessage(this.index);
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['flushMessage']))
 });
 
 /***/ }),
@@ -62354,7 +62366,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "alert alert-dismissible", class: _vm.alert.class },
+    {
+      staticClass: "alert alert-dismissible",
+      class: _vm.alert.class,
+      attrs: { id: "alert" }
+    },
     [
       _c(
         "button",
@@ -62364,6 +62380,11 @@ var render = function() {
             type: "button",
             "data-dismiss": "alert",
             "aria-hidden": "true"
+          },
+          on: {
+            click: function($event) {
+              return _vm.flushMessage(_vm.index)
+            }
           }
         },
         [_vm._v("×")]
@@ -62380,7 +62401,7 @@ var render = function() {
         ],
         1
       ),
-      _vm._v("\n    " + _vm._s(_vm.prompt.message) + "\n")
+      _vm._v("\n    " + _vm._s(_vm.message.content) + "\n")
     ]
   )
 }
@@ -79150,9 +79171,13 @@ router.beforeEach(function (to, from, next) {
   vueBodyClass.guard(to, next);
 
   if (to.name !== 'Login' && !to.meta.isAuthenticated) {
-    next({
-      name: 'Login'
-    });
+    if (_store__WEBPACK_IMPORTED_MODULE_12__["default"].getters.auth.isLoggedIn) {
+      next();
+    } else {
+      next({
+        name: 'Login'
+      });
+    }
   } else {
     next();
   }
@@ -79164,6 +79189,13 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.request.use(function (
 axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.response.use(function (config) {
   _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('hideLoading');
   return config;
+}, function (error) {
+  if (error.response) {
+    switch (error.response.status) {
+      case 401:
+        _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('logout');
+    }
+  }
 });
 var app = new Vue({
   router: router,
@@ -79845,9 +79877,37 @@ __webpack_require__.r(__webpack_exports__);
     commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], title);
     document.title = (title.title || 'Home') + ' | ' + "Laradmin Start Template";
   },
-  promptMessage: function promptMessage(_ref4, prompt) {
+  flashSuccess: function flashSuccess(_ref4, message) {
     var commit = _ref4.commit;
-    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["PROMPT_MESSAGE"], prompt);
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLASH_MESSAGE"], {
+      type: 'success',
+      content: message
+    });
+  },
+  flashError: function flashError(_ref5, message) {
+    var commit = _ref5.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLASH_MESSAGE"], {
+      type: 'error',
+      content: message
+    });
+  },
+  flashWarning: function flashWarning(_ref6, message) {
+    var commit = _ref6.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLASH_MESSAGE"], {
+      type: 'warning',
+      content: message
+    });
+  },
+  flashInfo: function flashInfo(_ref7, message) {
+    var commit = _ref7.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLASH_MESSAGE"], {
+      type: 'info',
+      content: message
+    });
+  },
+  flushMessage: function flushMessage(_ref8, index) {
+    var commit = _ref8.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLUSH_MESSAGE"], index);
   }
 });
 
@@ -79869,8 +79929,8 @@ __webpack_require__.r(__webpack_exports__);
   title: function title(state) {
     return state.title;
   },
-  prompt: function prompt(state) {
-    return state.prompt;
+  messages: function messages(state) {
+    return state.messages;
   }
 });
 
@@ -79923,17 +79983,111 @@ req.keys().forEach(function (file) {
   !*** ./resources/js/store/modules sync .*\.js$/ ***!
   \**************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyContext(req) {
-	var e = new Error("Cannot find module '" + req + "'");
-	e.code = 'MODULE_NOT_FOUND';
-	throw e;
+var map = {
+	"./auth.js": "./resources/js/store/modules/auth.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
 }
-webpackEmptyContext.keys = function() { return []; };
-webpackEmptyContext.resolve = webpackEmptyContext;
-module.exports = webpackEmptyContext;
-webpackEmptyContext.id = "./resources/js/store/modules sync recursive .*\\.js$/";
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/js/store/modules sync recursive .*\\.js$/";
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/auth.js":
+/*!********************************************!*\
+  !*** ./resources/js/store/modules/auth.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    status: '',
+    token: localStorage.getItem('token') || '',
+    user: {}
+  },
+  getters: {
+    isLoggedIn: function isLoggedIn(state) {
+      return !!state.token;
+    },
+    authStatus: function authStatus(state) {
+      return state.status;
+    }
+  },
+  mutations: {
+    auth_request: function auth_request(state) {
+      state.status = 'loading';
+    },
+    auth_success: function auth_success(state, token, user) {
+      state.status = 'success';
+      state.token = token;
+      state.user = user;
+    },
+    auth_error: function auth_error(state) {
+      state.status = 'error';
+    },
+    logout: function logout(status) {
+      state.status = '';
+      state.token = '';
+    }
+  },
+  actions: {
+    Login: function Login(_ref, user) {
+      var commit = _ref.commit;
+      return new Promise(function (resolve, reject) {
+        commit('auth_request');
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('login', user).then(function (response) {
+          var token = response.data.token;
+          var user = response.data.user;
+          localStorage.setItem('token', token);
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'] = token;
+          commit('auth_success', token, user);
+          resolve(response);
+        })["catch"](function (err) {
+          commit('auth_error');
+          localStorage.removeItem('token');
+          reject(err);
+        });
+      });
+    },
+    Logout: function Logout(_ref2) {
+      var commit = _ref2.commit;
+      return new Promise(function (resolve, reject) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('logout').then(function (response) {
+          removeIsLogin();
+          localStorage.removeItem('loginUsername');
+          delete axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'];
+          resolve(response);
+        })["catch"](function (err) {
+          reject(err);
+        });
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -79941,7 +80095,7 @@ webpackEmptyContext.id = "./resources/js/store/modules sync recursive .*\\.js$/"
 /*!**********************************************!*\
   !*** ./resources/js/store/mutation-types.js ***!
   \**********************************************/
-/*! exports provided: LOGIN, LOGOUT, SHOW_LOADING, HIDE_LOADING, UPDATE_TITLE, PROMPT_MESSAGE */
+/*! exports provided: LOGIN, LOGOUT, SHOW_LOADING, HIDE_LOADING, UPDATE_TITLE, FLASH_MESSAGE, FLUSH_MESSAGE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79951,13 +80105,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_LOADING", function() { return SHOW_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HIDE_LOADING", function() { return HIDE_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TITLE", function() { return UPDATE_TITLE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PROMPT_MESSAGE", function() { return PROMPT_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FLASH_MESSAGE", function() { return FLASH_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FLUSH_MESSAGE", function() { return FLUSH_MESSAGE; });
 var LOGIN = 'LOGIN';
 var LOGOUT = 'LOGOUT';
 var SHOW_LOADING = 'SHOW_LOADING';
 var HIDE_LOADING = 'HIDE_LOADING';
 var UPDATE_TITLE = 'UPDATE_TITLE';
-var PROMPT_MESSAGE = 'PROMPT_MESSAGE';
+var FLASH_MESSAGE = 'FLASH_MESSAGE';
+var FLUSH_MESSAGE = 'FLUSH_MESSAGE';
 
 /***/ }),
 
@@ -79986,8 +80142,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
 }), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], function (state, title) {
   Object.assign(state, title);
-}), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["PROMPT_MESSAGE"], function (state, prompt) {
-  Object.assign(state, prompt);
+}), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLASH_MESSAGE"], function (state, message) {
+  state.messages.push(message);
+}), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLUSH_MESSAGE"], function (state, index) {
+  state.messages.splice(index, 1);
 }), _types$SHOW_LOADING$t);
 
 /***/ }),
@@ -80004,10 +80162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   loading: false,
   title: null,
-  prompt: {
-    type: null,
-    message: null
-  }
+  token: null,
+  messages: []
 });
 
 /***/ }),

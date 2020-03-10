@@ -13,7 +13,7 @@
                     <!-- Login box -->
                     <div class="login-box">
                         <!-- Alert -->
-                        <alert v-if="prompt.message" :prompt="prompt"></alert>
+                        <alert v-for="(item, index) in messages" :key="index" :message="item"></alert>
 
                         <!-- Login card -->
                         <div class="card">
@@ -40,7 +40,7 @@ export default {
     name: 'App',
 
     computed: {
-        ...mapGetters(['loading', 'title', 'prompt'])
+        ...mapGetters(['loading', 'title', 'messages'])
     }
 }
 </script>

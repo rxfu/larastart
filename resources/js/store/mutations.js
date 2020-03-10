@@ -11,7 +11,11 @@ export default {
         Object.assign(state, title);
     },
 
-    [types.PROMPT_MESSAGE](state, prompt) {
-        Object.assign(state, prompt);
+    [types.FLASH_MESSAGE](state, message) {
+        state.messages.push(message);
+    },
+
+    [types.FLUSH_MESSAGE](state, index) {
+        state.messages.splice(index, 1);
     }
 }

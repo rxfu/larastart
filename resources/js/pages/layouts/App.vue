@@ -1,6 +1,8 @@
 <template>
     <!-- Site wrapper -->
     <div class="wrapper">
+        <loading v-if="loading"></loading>
+
         <navigation></navigation>
 
         <sidebar></sidebar>
@@ -45,7 +47,7 @@ export default {
     name: 'App',
 
     computed: {
-        ...mapGetters(['title', 'prompt'])
+        ...mapGetters(['loading', 'title', 'prompt'])
     }
 }
 </script>

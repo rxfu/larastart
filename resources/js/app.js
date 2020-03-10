@@ -70,7 +70,11 @@ router.beforeEach((to, from, next) => {
     vueBodyClass.guard(to, next);
 
     if (to.name !== 'Login' && !to.meta.isAuthenticated) {
-        next({ name: 'Login' });
+        if (store.getters.auth.isLoggedIn) {
+            next();
+        } else {
+            next({ name: 'Login' });
+        }
     } else {
         next();
     }
@@ -82,11 +86,21 @@ Axios.interceptors.request.use(function (config) {
     return config;
 });
 
-Axios.interceptors.response.use(function (config) {
-    store.dispatch('hideLoading');
-    
-    return config;
-});
+Axios.interceptors.response.use(
+    config => {
+        store.dispatch('hideLoading');
+        
+        return config;
+    },
+    error => {
+        if (error.response) {
+            switch (error.response.status) {
+                case 401:
+                    store.dispatch('logout');
+            }
+        }
+    }
+);
 
 const app = new Vue({
     router,

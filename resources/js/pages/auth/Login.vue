@@ -60,22 +60,25 @@ export default {
     methods: {
         ...mapActions([
             'setTitle',
-            'promptMessage'
+            'flashSuccess'
         ]),
 
         onSubmit() {
+            /* this.$store.dispatch('Login', {
+                username: this.username,
+                password: this.password,
+            }).then(() => {
+                this.$route.push({ name: 'Home'})
+            }).catch((error) => {
+                console.log(error.response);
+            }) */
             axios.post('/login', {
                 username: this.username,
                 password: this.password,
             }).then(response => {
                 console.log('successful');
                 console.log(response);
-                this.promptMessage({
-                    prompt: {
-                        type: 'success',
-                        message: '登录成功，欢迎使用本系统'
-                    }
-                });
+                this.flashSuccess('登录成功，欢迎使用本系统');
             }).catch(error => {
                 console.log(error);
                 if (error.response.status == 422) {
