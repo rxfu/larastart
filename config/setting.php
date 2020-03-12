@@ -10,4 +10,13 @@ return [
     'powerby' => 'Fu Rongxin',
     'copyright' => 'LaraStart Company',
     'password' => '123456',
+
+    // 状态代码
+    'code' => [
+        200 => '成功',
+
+        401 => '用户未认证',
+
+        500 => '服务器错误',
+    ]
 ];
