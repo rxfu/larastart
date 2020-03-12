@@ -14,12 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('v1')->middleware('auth:api')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+Route::prefix('v1')->group(function () {
+    Route::post('/login', 'Api\LoginController@login')->name('login');
 
-    Route::get('/users', function (Request $request) {
-        return response()->json(['name' => '张三']);
-    });
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+
+        Route::get('/users', function (Request $request) {
+            return response()->json(['name' => '张三']);
+        });
+
+        Route::post('logout', 'Api\LoginController@logout')->name('logout');
+    });;
 });

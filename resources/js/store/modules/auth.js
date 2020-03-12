@@ -37,7 +37,7 @@ export default {
         Login({commit}, user) {
             return new Promise((resolve, reject) => {
                 commit('auth_request');
-                Axios.post('login', user)
+                Axios.post('api/v1/login', user)
                 .then(response => {
                     const token = response.data.token;
                     const user = response.data.user;
@@ -56,7 +56,7 @@ export default {
 
         Logout({commit}) {
             return new Promise((resolve, reject) => {
-                Axios.get('logout')
+                Axios.get('api/v1/logout')
                 .then(response => {
                     removeIsLogin();
                     localStorage.removeItem('loginUsername');
