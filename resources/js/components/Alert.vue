@@ -66,10 +66,6 @@ export default {
         }
     },
 
-    destroyed() {
-        this.flushMessage(this.index);
-    },
-
     methods: {
         ...mapActions([
             'flushMessage'

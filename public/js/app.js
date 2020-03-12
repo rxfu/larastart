@@ -11914,9 +11914,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return data;
     }
   },
-  destroyed: function destroyed() {
-    this.flushMessage(this.index);
-  },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['flushMessage']))
 });
 
