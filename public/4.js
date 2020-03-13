@@ -61,7 +61,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['loading', 'title', 'prompt']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['loading', 'title', 'messages']))
 });
 
 /***/ }),
@@ -107,15 +107,15 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm.prompt.message
-            ? _c("alert", { attrs: { prompt: _vm.prompt } })
-            : _vm._e(),
+          _vm._l(_vm.messages, function(item, index) {
+            return _c("alert", { key: index, attrs: { message: item } })
+          }),
           _vm._v(" "),
           _c("section", { staticClass: "content" }, [
             _c("div", { staticClass: "content-fluid" }, [_c("router-view")], 1)
           ])
         ],
-        1
+        2
       ),
       _vm._v(" "),
       _c("foot")

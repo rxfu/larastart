@@ -35,37 +35,30 @@ export default {
 
     actions: {
         Login({commit}, user) {
-            return new Promise((resolve, reject) => {
-                commit('auth_request');
+            // return new Promise((resolve, reject) => {
+            //     commit('auth_request');
                 Axios.post('api/v1/login', user)
-                .then(response => {
-                    const token = response.data.token;
-                    const user = response.data.user;
-                    localStorage.setItem('token', token);
-                    Axios.defaults.headers.common['Authorization'] = token;
-                    commit('auth_success', token, user);
-                    resolve(response);
-                })
-                .catch(err => {
-                    commit('auth_error');
-                    localStorage.removeItem('token');
-                    reject(err);
-                });
-            });
+            //     .then(response => {
+            //         // console.log(response);
+            //     //     const token = response.data.token;
+            //     //     const user = response.data.user;
+            //     //     localStorage.setItem('token', token);
+            //     //     Axios.defaults.headers.common['Authorization'] = token;
+            //     //     commit('auth_success', token, user);
+            //     //     resolve(response);
+            //     });
+            // });
         },
 
         Logout({commit}) {
             return new Promise((resolve, reject) => {
                 Axios.get('api/v1/logout')
-                .then(response => {
-                    removeIsLogin();
-                    localStorage.removeItem('loginUsername');
-                    delete Axios.defaults.headers.common['Authorization'];
-                    resolve(response);
-                })
-                .catch(err => {
-                    reject(err);
-                })
+                // .then(response => {
+                //     removeIsLogin();
+                //     localStorage.removeItem('loginUsername');
+                //     delete Axios.defaults.headers.common['Authorization'];
+                //     resolve(response);
+                // })
             })
         }
     }

@@ -80,25 +80,42 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-Axios.interceptors.request.use(function (config) {
-    store.dispatch('showLoading');
+Axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
-    return config;
-});
+Axios.interceptors.request.use(
+    config => {
+        store.dispatch('showLoading');
+
+        // if (localStorage.access_token) {
+        //     config.headers.Authorization = localStorage.access_token;
+        // } else {
+        //     router.push({ name: 'Login' })
+        // }
+
+        return config;
+    },  error => {
+        return Promise.reject(error);
+    }
+);
 
 Axios.interceptors.response.use(
     config => {
         store.dispatch('hideLoading');
         
         return config;
-    },
-    error => {
-        if (error.response) {
-            switch (error.response.status) {
-                case 401:
-                    store.dispatch('logout');
-            }
-        }
+    }, response => {
+        return response;
+    }, error => {
+        // console.log(error);
+        // if (error.response) {
+        //     switch (error.response.status) {
+        //         case 401:
+        //             store.dispatch('logout');
+        //     }
+        // }
+
+        return Promise.reject(error);
     }
 );
 

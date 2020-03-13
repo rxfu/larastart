@@ -79179,20 +79179,33 @@ router.beforeEach(function (to, from, next) {
     next();
   }
 });
+axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.baseURL = 'http://127.0.0.1:8000/';
+axios__WEBPACK_IMPORTED_MODULE_4___default.a.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.request.use(function (config) {
-  _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('showLoading');
+  _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('showLoading'); // if (localStorage.access_token) {
+  //     config.headers.Authorization = localStorage.access_token;
+  // } else {
+  //     router.push({ name: 'Login' })
+  // }
+
   return config;
+}, function (error) {
+  return Promise.reject(error);
 });
 axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.response.use(function (config) {
   _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('hideLoading');
   return config;
+}, function (response) {
+  return response;
 }, function (error) {
-  if (error.response) {
-    switch (error.response.status) {
-      case 401:
-        _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('logout');
-    }
-  }
+  // console.log(error);
+  // if (error.response) {
+  //     switch (error.response.status) {
+  //         case 401:
+  //             store.dispatch('logout');
+  //     }
+  // }
+  return Promise.reject(error);
 });
 var app = new Vue({
   router: router,
@@ -80054,33 +80067,28 @@ __webpack_require__.r(__webpack_exports__);
   actions: {
     Login: function Login(_ref, user) {
       var commit = _ref.commit;
-      return new Promise(function (resolve, reject) {
-        commit('auth_request');
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('login', user).then(function (response) {
-          var token = response.data.token;
-          var user = response.data.user;
-          localStorage.setItem('token', token);
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'] = token;
-          commit('auth_success', token, user);
-          resolve(response);
-        })["catch"](function (err) {
-          commit('auth_error');
-          localStorage.removeItem('token');
-          reject(err);
-        });
-      });
+      // return new Promise((resolve, reject) => {
+      //     commit('auth_request');
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/v1/login', user); //     .then(response => {
+      //         // console.log(response);
+      //     //     const token = response.data.token;
+      //     //     const user = response.data.user;
+      //     //     localStorage.setItem('token', token);
+      //     //     Axios.defaults.headers.common['Authorization'] = token;
+      //     //     commit('auth_success', token, user);
+      //     //     resolve(response);
+      //     });
+      // });
     },
     Logout: function Logout(_ref2) {
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('logout').then(function (response) {
-          removeIsLogin();
-          localStorage.removeItem('loginUsername');
-          delete axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common['Authorization'];
-          resolve(response);
-        })["catch"](function (err) {
-          reject(err);
-        });
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/v1/logout'); // .then(response => {
+        //     removeIsLogin();
+        //     localStorage.removeItem('loginUsername');
+        //     delete Axios.defaults.headers.common['Authorization'];
+        //     resolve(response);
+        // })
       });
     }
   }

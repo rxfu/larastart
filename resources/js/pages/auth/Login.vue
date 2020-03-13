@@ -67,17 +67,13 @@ export default {
             /* this.$store.dispatch('Login', {
                 username: this.username,
                 password: this.password,
-            }).then(() => {
-                this.$route.push({ name: 'Home'})
-            }).catch((error) => {
-                console.log(error.response);
             }) */
-            axios.post('/login', {
+            axios.post('/api/v1/login', {
                 username: this.username,
                 password: this.password,
             }).then(response => {
                 console.log('successful');
-                console.log(response);
+                console.log(response.response);
                 this.flashSuccess('登录成功，欢迎使用本系统');
             }).catch(error => {
                 console.log(error);

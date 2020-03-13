@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Response\ResponseJson;
 use Exception;
 use Illuminate\Validation\ValidationException;
 
 class ApiException extends Exception
 {
+    use ResponseJson;
+
     protected $exception;
 
     public function __construct($code = 500, $exception = null)
@@ -47,21 +50,12 @@ class ApiException extends Exception
         //     $this->message = $this->exception->getMessage();
         // }
 
-        $status = substr($this->getCode(), 0, 3);
         $errors = [];
 
         if ($this->exception instanceof ValidationException) {
             $errors = $this->exception->validator->errors();
         }
 
-        $content = [
-            'status' => $status,
-            'type' => 'error',
-            'code' => $this->getCode(),
-            'message' => $this->getMessage(),
-            'errors' => $errors,
-        ];
-
-        return response()->json($content, $status);
+        return $this->fail($this->getCode(), $errors, $this->getMessage());
     }
 }
