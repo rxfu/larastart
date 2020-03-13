@@ -73,10 +73,10 @@ export default {
                 password: this.password,
             }).then(response => {
                 console.log('successful');
-                console.log(response.response);
+                console.log(response.status);
                 this.flashSuccess('登录成功，欢迎使用本系统');
             }).catch(error => {
-                console.log(error);
+                console.log(error.response);
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 }

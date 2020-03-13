@@ -79195,17 +79195,6 @@ axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.request.use(function (
 axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.response.use(function (config) {
   _store__WEBPACK_IMPORTED_MODULE_12__["default"].dispatch('hideLoading');
   return config;
-}, function (response) {
-  return response;
-}, function (error) {
-  // console.log(error);
-  // if (error.response) {
-  //     switch (error.response.status) {
-  //         case 401:
-  //             store.dispatch('logout');
-  //     }
-  // }
-  return Promise.reject(error);
 });
 var app = new Vue({
   router: router,

@@ -104,18 +104,6 @@ Axios.interceptors.response.use(
         store.dispatch('hideLoading');
         
         return config;
-    }, response => {
-        return response;
-    }, error => {
-        // console.log(error);
-        // if (error.response) {
-        //     switch (error.response.status) {
-        //         case 401:
-        //             store.dispatch('logout');
-        //     }
-        // }
-
-        return Promise.reject(error);
     }
 );
 

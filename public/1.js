@@ -87,11 +87,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         password: this.password
       }).then(function (response) {
         console.log('successful');
-        console.log(response.response);
+        console.log(response.status);
 
         _this.flashSuccess('登录成功，欢迎使用本系统');
       })["catch"](function (error) {
-        console.log(error);
+        console.log(error.response);
 
         if (error.response.status == 422) {
           _this.errors = error.response.data.errors;
