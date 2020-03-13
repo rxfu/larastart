@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -24,7 +25,7 @@ class LoginController extends Controller
             $credential = $request->only('username', 'password');
 
             if (!Auth::attempt($credential)) {
-                return $this->fail(401);
+                throw new ApiException(401001);
             }
 
             $user = $request->user();
@@ -36,17 +37,17 @@ class LoginController extends Controller
             }
 
             $token->save();
-
-            return response()->json([
+            $data = [
                 'accessToken' => $tokenResult->accessToken,
                 'token_type' => 'Bearer',
                 'expired_at' => Carbon::parse($token->expired_at)->toDateTimeString(),
-                200,
-            ]);
+            ];
+
+            return $this->success(200001, $data);
         } catch (ValidationException $exception) {
-            throw new ApiException('验证错误', $exception);
+            throw new ApiException(500, $exception);
         } catch (QueryException $exception) {
-            throw new ApiException('数据库错误', $exception);
+            throw new ApiException(500, $exception);
         }
     }
 
@@ -54,11 +55,10 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             $request->user()->token()->revoke();
+        } else {
+            throw new ApiException(401002);
         }
 
-        return response()->json([
-            'message' => '退出成功',
-            200,
-        ]);
+        return $this->success(200002);
     }
 }

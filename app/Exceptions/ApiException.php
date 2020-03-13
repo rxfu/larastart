@@ -3,15 +3,21 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Validation\ValidationException;
 
 class ApiException extends Exception
 {
     protected $exception;
 
-    public function __construct($message, $exception = null, $code = 500)
+    public function __construct($code = 500, $exception = null)
     {
         $this->exception = $exception;
-        $message = 'API 错误：' . $message;
+
+        if (!is_null($this->exception)) {
+            $message = iconv('GBK', 'UTF-8', __($this->exception->getMessage()));
+        } else {
+            $message = config('setting.code')[(int) $code];
+        }
 
         parent::__construct($message, $code);
     }
@@ -23,10 +29,10 @@ class ApiException extends Exception
      */
     public function report()
     {
-        $content = [
-            'message' => $this->getMessage(),
-            'exception' => $this->exception->getMessage(),
-        ];
+        // $content = [
+        //     'message' => $this->getMessage(),
+        //     'exception' => $this->exception->getMessage(),
+        // ];
     }
 
     /**
@@ -37,16 +43,25 @@ class ApiException extends Exception
      */
     public function render($request)
     {
-        if (config('app.debug')) {
-            $this->message = $this->exception->getMessage();
+        // if (config('app.debug')) {
+        //     $this->message = $this->exception->getMessage();
+        // }
+
+        $status = substr($this->getCode(), 0, 3);
+        $errors = [];
+
+        if ($this->exception instanceof ValidationException) {
+            $errors = $this->exception->validator->errors();
         }
 
         $content = [
+            'status' => $status,
             'type' => 'error',
-            'code' => $this->code,
-            'message' => iconv('GBK', 'UTF-8', __($this->message)),
+            'code' => $this->getCode(),
+            'message' => $this->getMessage(),
+            'errors' => $errors,
         ];
 
-        return response()->json($content);
+        return response()->json($content, $status);
     }
 }
