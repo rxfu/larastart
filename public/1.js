@@ -73,6 +73,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: this.title
     });
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['fails'])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'flashSuccess', 'login']), {
     onSubmit: function onSubmit() {
       this.login({
@@ -145,7 +146,10 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "form-control",
-                                  class: { "is-invalid": errors[0] },
+                                  class: {
+                                    "is-invalid":
+                                      errors[0] || _vm.fails["username"]
+                                  },
                                   attrs: {
                                     type: "text",
                                     id: "username",
@@ -182,7 +186,11 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c("invalid", { attrs: { message: errors[0] } })
+                                _c("invalid", {
+                                  attrs: {
+                                    message: errors[0] || _vm.fails["username"]
+                                  }
+                                })
                               ],
                               1
                             )
@@ -218,7 +226,10 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "form-control",
-                                  class: { "is-invalid": errors[0] },
+                                  class: {
+                                    "is-invalid":
+                                      errors[0] || _vm.fails["password"]
+                                  },
                                   attrs: {
                                     type: "password",
                                     id: "password",
@@ -254,7 +265,11 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c("invalid", { attrs: { message: errors[0] } })
+                                _c("invalid", {
+                                  attrs: {
+                                    message: errors[0] || _vm.fails["password"]
+                                  }
+                                })
                               ],
                               1
                             )

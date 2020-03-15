@@ -44,5 +44,9 @@ export default {
 
     flushMessage({commit}, index) {
         commit(types.FLUSH_MESSAGE, index);
+    },
+
+    flashInvalid({commit}, fails) {
+        commit(types.SET_INVALID, fails);
     }
 }

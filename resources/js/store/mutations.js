@@ -17,5 +17,9 @@ export default {
 
     [types.FLUSH_MESSAGE](state, index) {
         state.messages.splice(index, 1);
+    },
+
+    [types.SET_INVALID](state, fails) {
+        state.fails = fails;
     }
 }

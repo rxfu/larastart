@@ -18,29 +18,26 @@ class LoginController extends Controller
         try {
             $request->validate([
                 'username' => 'required|string',
-                'password' => 'required|string',
+                'password' => 'required|string|min:8',
                 'remember_me' => 'boolean',
             ]);
 
-            $credential = $request->only('username', 'password');
+            $credentials = $request->only('username', 'password');
 
-            if (!Auth::attempt($credential)) {
+            if (!Auth::attempt($credentials)) {
                 throw new ApiException(401001);
             }
 
             $user = $request->user();
-            $tokenResult = $user->createToken('Personal Access Token');
-            $token = $tokenResult->token;
+            $token = $user->createToken('Larastart')->accesstoken;
 
-            if ($request->remember_me) {
-                $token->expired_at = Carbon::now()->addWeek(1);
-            }
+            // if ($request->remember_me) {
+            //     $token->expired_at = Carbon::now()->addWeek(1);
+            // }
 
             $token->save();
             $data = [
-                'accessToken' => $tokenResult->accessToken,
-                'token_type' => 'Bearer',
-                'expired_at' => Carbon::parse($token->expired_at)->toDateTimeString(),
+                'token' => $token,
             ];
 
             return $this->success(200001, $data);

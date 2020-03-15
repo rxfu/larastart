@@ -3,24 +3,24 @@
         <form method="post" @submit.prevent="onSubmit" autocomplete="off">
             <validation-provider rules="required" v-slot="{ errors }" slim>
                 <div class="input-group mb-3">
-                    <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="用户名" required autofocus>
+                    <input type="text" id="username" name="username" v-model="username" class="form-control" :class="{ 'is-invalid': errors[0] || fails['username'] }" placeholder="用户名" required autofocus>
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <font-awesome-icon :icon="['fas', 'user']" />
                         </span>
                     </div>
-                    <invalid :message="errors[0]"></invalid>
+                    <invalid :message="errors[0] || fails['username']"></invalid>
                 </div>
             </validation-provider>
             <validation-provider rules="required" v-slot="{ errors }" slim>
                 <div class="input-group mb-3">
-                    <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors[0] }" placeholder="密码" required>
+                    <input type="password" id="password" name="password" v-model="password" class="form-control" :class="{ 'is-invalid': errors[0] || fails['password'] }" placeholder="密码" required>
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <font-awesome-icon :icon="['fas', 'lock']" />
                         </span>
                     </div>
-                    <invalid :message="errors[0]"></invalid>
+                    <invalid :message="errors[0] || fails['password']"></invalid>
                 </div>
             </validation-provider>
             <div class="row">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'Login',
@@ -54,6 +54,10 @@ export default {
 
     mounted() {
         this.setTitle({ title: this.title });
+    },
+    
+    computed: {
+        ...mapGetters(['fails'])
     },
 
     methods: {
