@@ -16,11 +16,13 @@ Axios.interceptors.request.use(
         //     router.push({ name: 'Login' })
         // }
 
+        let token = sessionStorage.getItem('access_token');
+
         return config;
     },
     error => {
         store.dispatch('hideLoading');
-        
+
         store.dispatch('flashError', '请求超时');
 
         return Promise.reject(error);

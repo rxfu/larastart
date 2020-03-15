@@ -1,5 +1,3 @@
-import Axios from "axios";
-
 export default {
     state: {
         status: '',
@@ -34,10 +32,10 @@ export default {
     },
 
     actions: {
-        Login({commit}, user) {
+        login({commit}, user) {
             // return new Promise((resolve, reject) => {
             //     commit('auth_request');
-                Axios.post('api/v1/login', user)
+                axios.post('api/v1/login', user)
             //     .then(response => {
             //         // console.log(response);
             //     //     const token = response.data.token;
@@ -50,9 +48,9 @@ export default {
             // });
         },
 
-        Logout({commit}) {
+        logout({commit}) {
             return new Promise((resolve, reject) => {
-                Axios.get('api/v1/logout')
+                axios.get('api/v1/logout')
                 // .then(response => {
                 //     removeIsLogin();
                 //     localStorage.removeItem('loginUsername');

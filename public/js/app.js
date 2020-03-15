@@ -79813,6 +79813,7 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.request.use(function (
   //     router.push({ name: 'Login' })
   // }
 
+  var token = sessionStorage.getItem('access_token');
   return config;
 }, function (error) {
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('hideLoading');
@@ -79821,12 +79822,10 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.request.use(function (
 });
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(function (response) {
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('hideLoading');
-  console.log('success');
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('flashSuccess', response.data.message);
   return response;
 }, function (error) {
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('hideLoading');
-  console.log('interceptor.error:' + error.response.status);
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('flashError', error.response.data.message);
   return Promise.resolve(error.response);
 });
@@ -80063,9 +80062,6 @@ webpackContext.id = "./resources/js/store/modules sync recursive .*\\.js$/";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
     status: '',
@@ -80098,11 +80094,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   actions: {
-    Login: function Login(_ref, user) {
+    login: function login(_ref, user) {
       var commit = _ref.commit;
       // return new Promise((resolve, reject) => {
       //     commit('auth_request');
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('api/v1/login', user); //     .then(response => {
+      axios.post('api/v1/login', user); //     .then(response => {
       //         // console.log(response);
       //     //     const token = response.data.token;
       //     //     const user = response.data.user;
@@ -80113,10 +80109,10 @@ __webpack_require__.r(__webpack_exports__);
       //     });
       // });
     },
-    Logout: function Logout(_ref2) {
+    logout: function logout(_ref2) {
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('api/v1/logout'); // .then(response => {
+        axios.get('api/v1/logout'); // .then(response => {
         //     removeIsLogin();
         //     localStorage.removeItem('loginUsername');
         //     delete Axios.defaults.headers.common['Authorization'];

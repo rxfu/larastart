@@ -73,25 +73,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       title: this.title
     });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'flashSuccess']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'flashSuccess', 'login']), {
     onSubmit: function onSubmit() {
-      /* this.$store.dispatch('Login', {
-          username: this.username,
-          password: this.password,
-      }) */
-      axios.post('/api/v1/login', {
+      this.login({
         username: this.username,
         password: this.password
-      }); // .then(response => {
-      //     console.log('successful');
-      //     console.log(response.status);
-      //     this.flashSuccess('登录成功，欢迎使用本系统');
-      // })
-      // .catch(error => {
-      //     console.log('login:'+error.response);
-      //     if (error.response.status == 422) {
-      //         this.errors = error.response.data.errors;
-      //     }
+      }); // axios.post('/api/v1/login', {
+      //     username: this.username,
+      //     password: this.password,
       // })
     }
   })

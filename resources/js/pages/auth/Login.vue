@@ -59,18 +59,19 @@ export default {
     methods: {
         ...mapActions([
             'setTitle',
-            'flashSuccess'
+            'flashSuccess',
+            'login'
         ]),
 
         onSubmit() {
-            /* this.$store.dispatch('Login', {
-                username: this.username,
-                password: this.password,
-            }) */
-            axios.post('/api/v1/login', {
+            this.login({
                 username: this.username,
                 password: this.password,
             })
+            // axios.post('/api/v1/login', {
+            //     username: this.username,
+            //     password: this.password,
+            // })
         }
     }
 }
