@@ -65,8 +65,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       title: '登录',
       username: null,
-      password: null,
-      errors: []
+      password: null
     };
   },
   mounted: function mounted() {
@@ -76,8 +75,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'flashSuccess']), {
     onSubmit: function onSubmit() {
-      var _this = this;
-
       /* this.$store.dispatch('Login', {
           username: this.username,
           password: this.password,
@@ -85,18 +82,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/v1/login', {
         username: this.username,
         password: this.password
-      }).then(function (response) {
-        console.log('successful');
-        console.log(response.status);
-
-        _this.flashSuccess('登录成功，欢迎使用本系统');
-      })["catch"](function (error) {
-        console.log(error.response);
-
-        if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
-        }
-      });
+      }); // .then(response => {
+      //     console.log('successful');
+      //     console.log(response.status);
+      //     this.flashSuccess('登录成功，欢迎使用本系统');
+      // })
+      // .catch(error => {
+      //     console.log('login:'+error.response);
+      //     if (error.response.status == 422) {
+      //         this.errors = error.response.data.errors;
+      //     }
+      // })
     }
   })
 });

@@ -50,7 +50,6 @@ export default {
         title: '登录',
         username: null,
         password: null,
-        errors: []
     }),
 
     mounted() {
@@ -71,15 +70,6 @@ export default {
             axios.post('/api/v1/login', {
                 username: this.username,
                 password: this.password,
-            }).then(response => {
-                console.log('successful');
-                console.log(response.status);
-                this.flashSuccess('登录成功，欢迎使用本系统');
-            }).catch(error => {
-                console.log(error.response);
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
-                }
             })
         }
     }

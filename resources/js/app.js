@@ -12,7 +12,6 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import Axios from 'axios';
 import VueBodyClass from 'vue-body-class';
 import { ValidationProvider, ValidationObserver, localize, extend } from 'vee-validate/dist/vee-validate.full.esm';
 import zh_CN from 'vee-validate/dist/locale/zh_CN.json';
@@ -23,6 +22,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import routes from './routes';
 import store from './store';
+
+require('./http');
 
 // 解决 webpack 异步组件无法解析的问题，此问题为 webpack 的官方bug
 import '../sass/empty.scss';
@@ -79,33 +80,6 @@ router.beforeEach((to, from, next) => {
         next();
     }
 });
-
-Axios.defaults.baseURL = 'http://127.0.0.1:8000/';
-Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-
-Axios.interceptors.request.use(
-    config => {
-        store.dispatch('showLoading');
-
-        // if (localStorage.access_token) {
-        //     config.headers.Authorization = localStorage.access_token;
-        // } else {
-        //     router.push({ name: 'Login' })
-        // }
-
-        return config;
-    },  error => {
-        return Promise.reject(error);
-    }
-);
-
-Axios.interceptors.response.use(
-    config => {
-        store.dispatch('hideLoading');
-        
-        return config;
-    }
-);
 
 const app = new Vue({
     router,
