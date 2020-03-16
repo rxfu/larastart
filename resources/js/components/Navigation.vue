@@ -40,10 +40,10 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item d-done d-sm-inline-block">
-                <router-link to="#" class="nav-link">
+                <a href="#" @click="logout" class="nav-link">
                     <font-awesome-icon :icon="['fas', 'sign-out-alt']" />
                     退出
-                </router-link>
+                </a>
             </li>
         </ul>
     </nav>
@@ -53,13 +53,19 @@
 
 <script>
 export default {
-    name: 'Header',
+    name: 'Navigation',
 
     props: [ 'login' ],
 
     data: function() {
         return {
             title: process.env.MIX_APP_NAME
+        }
+    },
+
+    methods: {
+        logout() {
+            this.logout();
         }
     }
 }

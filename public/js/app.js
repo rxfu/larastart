@@ -12086,12 +12086,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Header',
+  name: 'Navigation',
   props: ['login'],
   data: function data() {
     return {
       title: "Laradmin Start Template"
     };
+  },
+  methods: {
+    logout: function logout() {
+      this.logout();
+    }
   }
 });
 
@@ -63610,24 +63615,23 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-            _c(
-              "li",
-              { staticClass: "nav-item d-done d-sm-inline-block" },
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "nav-link", attrs: { to: "#" } },
-                  [
-                    _c("font-awesome-icon", {
-                      attrs: { icon: ["fas", "sign-out-alt"] }
-                    }),
-                    _vm._v("\n                退出\n            ")
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+            _c("li", { staticClass: "nav-item d-done d-sm-inline-block" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: { href: "#" },
+                  on: { click: _vm.logout }
+                },
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: ["fas", "sign-out-alt"] }
+                  }),
+                  _vm._v("\n                退出\n            ")
+                ],
+                1
+              )
+            ])
           ])
         ]
       )
@@ -82456,12 +82460,12 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout(_ref2) {
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
-        axios.get('api/v1/logout'); // .then(response => {
-        //     removeIsLogin();
-        //     localStorage.removeItem('loginUsername');
-        //     delete Axios.defaults.headers.common['Authorization'];
-        //     resolve(response);
-        // })
+        axios.post('api/v1/logout').then(function (response) {
+          //     removeIsLogin();
+          //     localStorage.removeItem('loginUsername');
+          //     delete Axios.defaults.headers.common['Authorization'];
+          resolve(response);
+        });
       });
     }
   }

@@ -82,8 +82,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         username: this.username,
         password: this.password
       }).then(function () {
-        console.log('success');
-
         _this.$router.push({
           name: 'Dashboard'
         });

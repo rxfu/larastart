@@ -50,13 +50,13 @@ export default {
 
         logout({commit}) {
             return new Promise((resolve, reject) => {
-                axios.get('api/v1/logout')
-                // .then(response => {
+                axios.post('api/v1/logout')
+                .then(response => {
                 //     removeIsLogin();
                 //     localStorage.removeItem('loginUsername');
                 //     delete Axios.defaults.headers.common['Authorization'];
-                //     resolve(response);
-                // })
+                    resolve(response);
+                })
             })
         }
     }
