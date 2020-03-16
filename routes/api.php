@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('/login', 'Api\LoginController@login')->name('login');
+    Route::post('/login', 'Api\PassportController@login')->name('login');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('/user', function (Request $request) {
@@ -26,6 +26,6 @@ Route::prefix('v1')->group(function () {
             return response()->json(['name' => '张三']);
         });
 
-        Route::post('logout', 'Api\LoginController@logout')->name('logout');
+        Route::post('logout', 'Api\PassportController@logout')->name('logout');
     });;
 });

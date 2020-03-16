@@ -33,19 +33,19 @@ export default {
 
     actions: {
         login({commit}, user) {
-            // return new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
             //     commit('auth_request');
                 axios.post('api/v1/login', user)
-            //     .then(response => {
+                .then(response => {
             //         // console.log(response);
             //     //     const token = response.data.token;
             //     //     const user = response.data.user;
             //     //     localStorage.setItem('token', token);
             //     //     Axios.defaults.headers.common['Authorization'] = token;
             //     //     commit('auth_success', token, user);
-            //     //     resolve(response);
-            //     });
-            // });
+                    resolve(response);
+                });
+            });
         },
 
         logout({commit}) {

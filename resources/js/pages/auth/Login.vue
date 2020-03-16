@@ -71,7 +71,11 @@ export default {
             this.login({
                 username: this.username,
                 password: this.password,
-            })
+            }).then(() => {
+                this.$router.push({
+                    name: 'Dashboard'
+                })
+            });
             // axios.post('/api/v1/login', {
             //     username: this.username,
             //     password: this.password,
