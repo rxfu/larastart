@@ -13717,7 +13717,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['messages'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['flushMessage']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['flushMessage'])),
+  destroyed: function destroyed() {
+    var _this = this;
+
+    messages.forEach(function (message) {
+      _this.flushMessage(message.id);
+    });
+  }
 });
 
 /***/ }),

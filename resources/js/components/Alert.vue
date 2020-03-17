@@ -27,6 +27,12 @@ export default {
         ...mapActions([
             'flushMessage'
         ])
+    },
+
+    destroyed() {
+        messages.forEach(message => {
+            this.flushMessage(message.id);
+        });
     }
 }
 </script>
