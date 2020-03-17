@@ -12,7 +12,6 @@ window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import VueBodyClass from 'vue-body-class';
 import { ValidationProvider, ValidationObserver, localize, extend } from 'vee-validate/dist/vee-validate.full.esm';
 import zh_CN from 'vee-validate/dist/locale/zh_CN.json';
 
@@ -20,7 +19,7 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-import routes from './routes';
+import router from './router';
 import store from './store';
 
 require('./http');
@@ -60,28 +59,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-const router = new VueRouter({
-    mode: 'history',
-    base: process.env.MIX_BASE_URL,
-    routes
-});
-
-const vueBodyClass = new VueBodyClass(routes);
-
-router.beforeEach((to, from, next) => {
-    vueBodyClass.guard(to, next);
-
-    if (to.name !== 'Login' && !to.meta.isAuthenticated) {
-        if (store.getters.auth.isLoggedIn) {
-            next();
-        } else {
-            next({ name: 'Login' });
-        }
-    } else {
-        next();
-    }
-});
 
 const app = new Vue({
     router,

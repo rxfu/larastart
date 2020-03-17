@@ -12,7 +12,7 @@
                 <div class="login-page">
                     <!-- Login box -->
                     <div class="login-box">
-                        <!-- Alert -->
+                        
                         <alert></alert>
 
                         <!-- Login card -->

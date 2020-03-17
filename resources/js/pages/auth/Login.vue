@@ -72,9 +72,9 @@ export default {
                 username: this.username,
                 password: this.password,
             }).then(() => {
-                // this.$router.push({
-                //     name: 'Dashboard'
-                // })
+                this.$router.push({
+                    name: 'Dashboard'
+                })
             }).catch(error => {
                 console.log(error.response);
             });

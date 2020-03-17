@@ -24,8 +24,7 @@
                 </div><!-- /.container-fluid -->
             </section>
 
-            <!-- Alert -->
-            <alert v-for="item in messages" :key="item.id" :message="item"></alert>
+            <alert></alert>
 
             <!-- Main content -->
             <section class="content">

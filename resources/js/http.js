@@ -1,5 +1,6 @@
 import Axios from "axios";
 import store from './store';
+import router from './router';
 import config from './config';
 
 Axios.defaults.baseURL = config.baseURL;
@@ -10,13 +11,9 @@ Axios.interceptors.request.use(
     config => {
         store.dispatch('showLoading');
 
-        // if (localStorage.access_token) {
-        //     config.headers.Authorization = localStorage.access_token;
-        // } else {
-        //     router.push({ name: 'Login' })
-        // }
-
-        let token = sessionStorage.getItem('access_token');
+        if (localStorage.getItem('Authorization')) {
+            config.headers.Authorization = localStorage.getItem('Authorization');
+        }
 
         return config;
     },
@@ -39,9 +36,21 @@ Axios.interceptors.response.use(
     },
     error => {
         store.dispatch('hideLoading');
-        
-        store.dispatch('flashError', error.response.data.message);
-        store.dispatch('flashInvalid', error.response.data.data);
+
+        if (error.response) {
+            store.dispatch('flashError', error.response.data.message);
+            store.dispatch('flashInvalid', error.response.data.data);
+
+            switch (error.response.status) {
+                case 401:
+                    router.replace({
+                        name: 'Login',
+                        query: {
+                            redirect: router.currentRoute.fullPath
+                        }
+                    });
+            }
+        }
 
         return Promise.reject(error);
     }

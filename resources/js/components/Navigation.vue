@@ -40,7 +40,7 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item d-done d-sm-inline-block">
-                <a href="#" @click="logout" class="nav-link">
+                <a href="#" @click="onLogout" class="nav-link">
                     <font-awesome-icon :icon="['fas', 'sign-out-alt']" />
                     退出
                 </a>
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
     name: 'Navigation',
 
@@ -64,8 +66,16 @@ export default {
     },
 
     methods: {
-        logout() {
-            this.logout();
+        ...mapActions([
+            'logout'
+        ]),
+
+        onLogout() {
+            this.logout().then(() => {
+                this.$router.push({
+                    name: 'Login'
+                });
+            });
         }
     }
 }

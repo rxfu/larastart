@@ -111,9 +111,7 @@ class PassportController extends Controller
     public function logout(Request $request)
     {
         if (Auth::check()) {
-            $request->user()->token()->revoke();
-        } else {
-            throw new ApiException(401002);
+            $request->user()->token()->delete();
         }
 
         return $this->success(200002);

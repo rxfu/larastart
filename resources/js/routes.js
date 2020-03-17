@@ -4,21 +4,21 @@ export default [{
     component: resolve => require(['./pages/layouts/App.vue'], resolve),
     meta: {
         bodyClass: 'sidebar-mini',
-        isAuthenticated: false
+        requiresAuth: true
     },
     children: [{
         path: '/dashboard',
         name: 'Dashboard',
         component: resolve => require(['./pages/home/Dashboard.vue'], resolve),
         meta: {
-            isAuthenticated: false
+            requiresAuth: true
         }
     }, {
         path: '/404',
         name: '404',
         component: resolve => require(['./pages/error/404.vue'], resolve),
         meta: {
-            isAuthenticated: false
+            requiresAuth: true
         }
     }]
 }, {
@@ -27,7 +27,7 @@ export default [{
     component: resolve => require(['./pages/layouts/Page.vue'], resolve),
     meta: {
         bodyClass: 'layout-top-nav',
-        isAuthenticated: false
+        requiresAuth: false
     },
     children: [{
         path: '/login',

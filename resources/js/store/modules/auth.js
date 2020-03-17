@@ -37,11 +37,11 @@ export default {
             //     commit('auth_request');
                 axios.post('api/v1/login', user)
                 .then(response => {
-            //         // console.log(response);
-            //     //     const token = response.data.token;
+                    console.log(response);
+                    const token = 'Bearer ' + response.data.data.accessToken;
             //     //     const user = response.data.user;
-            //     //     localStorage.setItem('token', token);
-            //     //     Axios.defaults.headers.common['Authorization'] = token;
+                    localStorage.setItem('Authorization', token);
+                    axios.defaults.headers.common['Authorization'] = token;
             //     //     commit('auth_success', token, user);
                     resolve(response);
                 }).catch(error => {
@@ -54,10 +54,13 @@ export default {
             return new Promise((resolve, reject) => {
                 axios.post('api/v1/logout')
                 .then(response => {
+                    console.log(response);
                 //     removeIsLogin();
                 //     localStorage.removeItem('loginUsername');
-                //     delete Axios.defaults.headers.common['Authorization'];
+                    delete axios.defaults.headers.common['Authorization'];
                     resolve(response);
+                }).catch(error => {
+                    console.log(error.response);
                 })
             })
         }

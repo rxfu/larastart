@@ -76,12 +76,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['fails'])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['setTitle', 'flashSuccess', 'login']), {
     onSubmit: function onSubmit() {
+      var _this = this;
+
       this.login({
         username: this.username,
         password: this.password
-      }).then(function () {// this.$router.push({
-        //     name: 'Dashboard'
-        // })
+      }).then(function () {
+        _this.$router.push({
+          name: 'Dashboard'
+        });
       })["catch"](function (error) {
         console.log(error.response);
       }); // axios.post('/api/v1/login', {
