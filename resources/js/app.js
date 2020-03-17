@@ -25,6 +25,8 @@ import store from './store';
 
 require('./http');
 
+require('admin-lte/dist/js/adminlte');
+
 // 解决 webpack 异步组件无法解析的问题，此问题为 webpack 的官方bug
 import '../sass/empty.scss';
 

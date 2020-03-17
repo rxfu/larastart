@@ -13,7 +13,7 @@
                     <!-- Login box -->
                     <div class="login-box">
                         <!-- Alert -->
-                        <alert v-for="(item, index) in messages" :key="index" :message="item"></alert>
+                        <alert v-for="item in messages" :key="item.id" :message="item"></alert>
 
                         <!-- Login card -->
                         <div class="card">

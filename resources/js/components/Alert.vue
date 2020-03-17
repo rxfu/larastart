@@ -1,7 +1,7 @@
 <template>
     <!-- Alert -->
     <div id="alert" class="alert alert-dismissible" :class="alert.class">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" @click="flushMessage(index)">&times;</button>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" @click="flushMessage(message.id)">&times;</button>
         <h5>
             <font-awesome-icon :icon="['fas', alert.icon]" class="icon" /> {{ alert.title }}！
         </h5>
@@ -15,7 +15,7 @@ import { mapActions } from 'vuex';
 export default {
     name: 'Alert',
 
-    props: [ 'message', 'index' ],
+    props: [ 'message' ],
 
     computed: {
         alert: function() {

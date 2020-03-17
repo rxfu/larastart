@@ -12,6 +12,7 @@ export default {
     },
 
     [types.FLASH_MESSAGE](state, message) {
+        message.id = state.messages.length;
         state.messages.push(message);
     },
 
