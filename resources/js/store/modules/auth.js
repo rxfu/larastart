@@ -44,6 +44,8 @@ export default {
             //     //     Axios.defaults.headers.common['Authorization'] = token;
             //     //     commit('auth_success', token, user);
                     resolve(response);
+                }).catch(error => {
+                    console.log(error.response);
                 });
             });
         },

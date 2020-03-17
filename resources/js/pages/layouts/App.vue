@@ -25,7 +25,7 @@
             </section>
 
             <!-- Alert -->
-            <alert v-for="(item, index) in messages" :key="index" :message="item"></alert>
+            <alert v-for="item in messages" :key="item.id" :message="item"></alert>
 
             <!-- Main content -->
             <section class="content">

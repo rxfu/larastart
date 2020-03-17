@@ -75,6 +75,8 @@ export default {
                 // this.$router.push({
                 //     name: 'Dashboard'
                 // })
+            }).catch(error => {
+                console.log(error.response);
             });
             // axios.post('/api/v1/login', {
             //     username: this.username,

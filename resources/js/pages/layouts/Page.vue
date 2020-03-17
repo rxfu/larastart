@@ -13,7 +13,7 @@
                     <!-- Login box -->
                     <div class="login-box">
                         <!-- Alert -->
-                        <alert v-for="item in messages" :key="item.id" :message="item"></alert>
+                        <alert></alert>
 
                         <!-- Login card -->
                         <div class="card">
@@ -40,7 +40,7 @@ export default {
     name: 'App',
 
     computed: {
-        ...mapGetters(['loading', 'title', 'messages'])
+        ...mapGetters(['loading', 'title'])
     }
 }
 </script>

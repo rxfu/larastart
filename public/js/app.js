@@ -13711,58 +13711,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
-  props: ['message'],
-  computed: {
-    alert: function alert() {
-      var data = {};
-
-      switch (this.message.type) {
-        case 'error':
-          data = {
-            'class': 'alert-danger',
-            'icon': 'ban',
-            'title': '错误'
-          };
-          break;
-
-        case 'info':
-          data = {
-            'class': 'alert-info',
-            'icon': 'info',
-            'title': '信息'
-          };
-          break;
-
-        case 'warning':
-          data = {
-            'class': 'alert-warning',
-            'icon': 'warning',
-            'title': '警告'
-          };
-          break;
-
-        case 'success':
-          data = {
-            'class': 'alert-success',
-            'icon': 'check',
-            'title': '成功'
-          };
-          break;
-
-        default:
-          data = {
-            'class': 'alert-secondary',
-            'icon': 'fa-info',
-            'title': '其他'
-          };
-      }
-
-      return data;
-    }
-  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['messages'])),
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['flushMessage']))
 });
 
@@ -65156,44 +65110,51 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    {
-      staticClass: "alert alert-dismissible",
-      class: _vm.alert.class,
-      attrs: { id: "alert" }
-    },
-    [
-      _c(
-        "button",
+    "section",
+    { attrs: { id: "alert" } },
+    _vm._l(_vm.messages, function(message) {
+      return _c(
+        "div",
         {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "alert",
-            "aria-hidden": "true"
-          },
-          on: {
-            click: function($event) {
-              return _vm.flushMessage(_vm.message.id)
-            }
-          }
+          key: message.id,
+          staticClass: "alert alert-dismissible",
+          class: message.class
         },
-        [_vm._v("×")]
-      ),
-      _vm._v(" "),
-      _c(
-        "h5",
         [
-          _c("font-awesome-icon", {
-            staticClass: "icon",
-            attrs: { icon: ["fas", _vm.alert.icon] }
-          }),
-          _vm._v(" " + _vm._s(_vm.alert.title) + "！\n    ")
-        ],
-        1
-      ),
-      _vm._v("\n    " + _vm._s(_vm.message.content) + "\n")
-    ]
+          _c(
+            "button",
+            {
+              staticClass: "close",
+              attrs: {
+                type: "button",
+                "data-dismiss": "alert",
+                "aria-hidden": "true"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.flushMessage(message.id)
+                }
+              }
+            },
+            [_vm._v("×")]
+          ),
+          _vm._v(" "),
+          _c(
+            "h5",
+            [
+              _c("font-awesome-icon", {
+                staticClass: "icon",
+                attrs: { icon: ["fas", message.icon] }
+              }),
+              _vm._v(" " + _vm._s(message.title) + "！\n        ")
+            ],
+            1
+          ),
+          _vm._v("\n        " + _vm._s(message.content) + "\n    ")
+        ]
+      )
+    }),
+    0
   )
 }
 var staticRenderFns = []
@@ -84014,12 +83975,12 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.request.use(function (
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(function (response) {
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('hideLoading');
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('flashSuccess', response.data.message);
-  return response;
+  return Promise.resolve(response);
 }, function (error) {
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('hideLoading');
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('flashError', error.response.data.message);
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('flashInvalid', error.response.data.data);
-  return Promise.resolve(error.response);
+  return Promise.reject(error);
 });
 
 /***/ }),
@@ -84305,6 +84266,8 @@ __webpack_require__.r(__webpack_exports__);
           //     //     Axios.defaults.headers.common['Authorization'] = token;
           //     //     commit('auth_success', token, user);
           resolve(response);
+        })["catch"](function (error) {
+          console.log(error.response);
         });
       });
     },
@@ -84378,6 +84341,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_TITLE"], function (state, title) {
   Object.assign(state, title);
 }), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLASH_MESSAGE"], function (state, message) {
+  var data = {};
+
+  switch (message.type) {
+    case 'error':
+      data = {
+        'class': 'alert-danger',
+        'icon': 'ban',
+        'title': '错误'
+      };
+      break;
+
+    case 'info':
+      data = {
+        'class': 'alert-info',
+        'icon': 'info',
+        'title': '信息'
+      };
+      break;
+
+    case 'warning':
+      data = {
+        'class': 'alert-warning',
+        'icon': 'warning',
+        'title': '警告'
+      };
+      break;
+
+    case 'success':
+      data = {
+        'class': 'alert-success',
+        'icon': 'check',
+        'title': '成功'
+      };
+      break;
+
+    default:
+      data = {
+        'class': 'alert-secondary',
+        'icon': 'fa-info',
+        'title': '其他'
+      };
+  }
+
+  Object.assign(message, data);
   message.id = state.messages.length;
   state.messages.push(message);
 }), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLUSH_MESSAGE"], function (state, index) {

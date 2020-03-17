@@ -107,8 +107,8 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._l(_vm.messages, function(item, index) {
-            return _c("alert", { key: index, attrs: { message: item } })
+          _vm._l(_vm.messages, function(item) {
+            return _c("alert", { key: item.id, attrs: { message: item } })
           }),
           _vm._v(" "),
           _c("section", { staticClass: "content" }, [

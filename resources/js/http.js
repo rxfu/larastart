@@ -35,7 +35,7 @@ Axios.interceptors.response.use(
         
         store.dispatch('flashSuccess', response.data.message);
 
-        return response;
+        return Promise.resolve(response);
     },
     error => {
         store.dispatch('hideLoading');
@@ -43,6 +43,6 @@ Axios.interceptors.response.use(
         store.dispatch('flashError', error.response.data.message);
         store.dispatch('flashInvalid', error.response.data.data);
 
-        return Promise.resolve(error.response);
+        return Promise.reject(error);
     }
 );
