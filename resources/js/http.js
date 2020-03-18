@@ -11,8 +11,8 @@ Axios.interceptors.request.use(
     config => {
         store.dispatch('showLoading');
 
-        if (localStorage.getItem('Authorization')) {
-            config.headers.Authorization = localStorage.getItem('Authorization');
+        if (sessionStorage.getItem('Authorization')) {
+            config.headers.Authorization = sessionStorage.getItem('Authorization');
         }
 
         return config;

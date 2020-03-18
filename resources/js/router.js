@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
     vueBodyClass.guard(to, next);
 
     if (to.name !== 'Login' && to.matched.some(record => record.meta.requiresAuth)) {
-        if (store.getters.isLoggedIn) {
+        if (store.getters.isLogin) {
             next();
         } else {
             next({

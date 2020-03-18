@@ -42,9 +42,13 @@ export default {
         }); 
     },
 
-    flushMessage({commit}, index) {
-        commit(types.FLUSH_MESSAGE, index);
+    deleteMessage({commit}, index) {
+        commit(types.DELETE_MESSAGE, index);
     },
+
+    flushMessages({commit}) {
+        commit(types.EMPTY_MESSAGES);
+    }
 
     flashInvalid({commit}, fails) {
         commit(types.SET_INVALID, fails);

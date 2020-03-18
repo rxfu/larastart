@@ -2,7 +2,7 @@
     <!-- Alert -->
     <section id="alert">
         <div class="alert alert-dismissible" :class="message.class" v-for="message in messages" :key="message.id">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" @click="flushMessage(message.id)">&times;</button>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" @click="deleteMessage(message.id)">&times;</button>
             <h5>
                 <font-awesome-icon :icon="['fas', message.icon]" class="icon" /> {{ message.title }}！
             </h5>
@@ -25,14 +25,13 @@ export default {
 
     methods: {
         ...mapActions([
-            'flushMessage'
+            'deleteMessage',
+            'flushMessages'
         ])
     },
 
     destroyed() {
-        messages.forEach(message => {
-            this.flushMessage(message.id);
-        });
+        this.flushMessages();
     }
 }
 </script>

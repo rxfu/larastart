@@ -1,13 +1,12 @@
 export default {
     state: {
-        status: '',
-        token: localStorage.getItem('token') || '',
+        token: '',
         user: {}
     },
 
     getters: {
-        isLoggedIn: state => !!state.token,
-        authStatus: state => state.status
+        isLogin: state => !!state.token,
+        authUser: state => state.user,
     },
 
     mutations: {
@@ -34,33 +33,28 @@ export default {
     actions: {
         login({commit}, user) {
             return new Promise((resolve, reject) => {
-            //     commit('auth_request');
                 axios.post('api/v1/login', user)
                 .then(response => {
-                    console.log(response);
                     const token = 'Bearer ' + response.data.data.accessToken;
-            //     //     const user = response.data.user;
-                    localStorage.setItem('Authorization', token);
-                    axios.defaults.headers.common['Authorization'] = token;
-            //     //     commit('auth_success', token, user);
+
+                    sessionStorage.setItem('Authorization', token);
+
                     resolve(response);
-                }).catch(error => {
-                    console.log(error.response);
-                });
-            });
+                })
+            })
         },
 
         logout({commit}) {
             return new Promise((resolve, reject) => {
                 axios.post('api/v1/logout')
                 .then(response => {
-                    console.log(response);
-                //     removeIsLogin();
-                //     localStorage.removeItem('loginUsername');
-                    delete axios.defaults.headers.common['Authorization'];
+                    if (sessionStorage.getItem('Authorization')) {
+                        sessionStorage.removeItem('Authorization');
+
+                        delete axios.defaults.headers.common['Authorization'];
+                    }
+
                     resolve(response);
-                }).catch(error => {
-                    console.log(error.response);
                 })
             })
         }

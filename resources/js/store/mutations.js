@@ -61,9 +61,13 @@ export default {
         state.messages.push(message);
     },
 
-    [types.FLUSH_MESSAGE](state, index) {
+    [types.DELETE_MESSAGE](state, index) {
         state.messages.splice(index, 1);
     },
+
+    [types.EMPTY_MESSAGES](state) {
+        state.messages = [];
+    }
 
     [types.SET_INVALID](state, fails) {
         state.fails = fails;
