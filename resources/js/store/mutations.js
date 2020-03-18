@@ -62,12 +62,12 @@ export default {
     },
 
     [types.DELETE_MESSAGE](state, index) {
-        state.messages.splice(index, 1);
+        state.messages.splice(state.messages.findIndex(item => item.id === index), 1);
     },
 
     [types.EMPTY_MESSAGES](state) {
         state.messages = [];
-    }
+    },
 
     [types.SET_INVALID](state, fails) {
         state.fails = fails;

@@ -48,7 +48,7 @@ export default {
 
     flushMessages({commit}) {
         commit(types.EMPTY_MESSAGES);
-    }
+    },
 
     flashInvalid({commit}, fails) {
         commit(types.SET_INVALID, fails);

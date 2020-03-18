@@ -13717,13 +13717,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['messages'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['flushMessage'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['deleteMessage', 'flushMessages'])),
   destroyed: function destroyed() {
-    var _this = this;
-
-    messages.forEach(function (message) {
-      _this.flushMessage(message.id);
-    });
+    this.flushMessages();
   }
 });
 
@@ -65153,7 +65149,7 @@ var render = function() {
               },
               on: {
                 click: function($event) {
-                  return _vm.flushMessage(message.id)
+                  return _vm.deleteMessage(message.id)
                 }
               }
             },
@@ -83960,8 +83956,8 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.withCredentials = true;
 axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.request.use(function (config) {
   _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('showLoading');
 
-  if (localStorage.getItem('Authorization')) {
-    config.headers.Authorization = localStorage.getItem('Authorization');
+  if (sessionStorage.getItem('Authorization')) {
+    config.headers.Authorization = sessionStorage.getItem('Authorization');
   }
 
   return config;
@@ -84027,7 +84023,7 @@ router.beforeEach(function (to, from, next) {
   if (to.name !== 'Login' && to.matched.some(function (record) {
     return record.meta.requiresAuth;
   })) {
-    if (_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isLoggedIn) {
+    if (_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isLogin) {
       next();
     } else {
       next({
@@ -84160,12 +84156,16 @@ __webpack_require__.r(__webpack_exports__);
       content: message
     });
   },
-  flushMessage: function flushMessage(_ref8, index) {
+  deleteMessage: function deleteMessage(_ref8, index) {
     var commit = _ref8.commit;
-    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLUSH_MESSAGE"], index);
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_MESSAGE"], index);
   },
-  flashInvalid: function flashInvalid(_ref9, fails) {
+  flushMessages: function flushMessages(_ref9) {
     var commit = _ref9.commit;
+    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_MESSAGES"]);
+  },
+  flashInvalid: function flashInvalid(_ref10, fails) {
+    var commit = _ref10.commit;
     commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["SET_INVALID"], fails);
   }
 });
@@ -84284,16 +84284,15 @@ webpackContext.id = "./resources/js/store/modules sync recursive .*\\.js$/";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
-    status: '',
-    token: localStorage.getItem('token') || '',
+    token: '',
     user: {}
   },
   getters: {
-    isLoggedIn: function isLoggedIn(state) {
+    isLogin: function isLogin(state) {
       return !!state.token;
     },
-    authStatus: function authStatus(state) {
-      return state.status;
+    authUser: function authUser(state) {
+      return state.user;
     }
   },
   mutations: {
@@ -84317,17 +84316,10 @@ __webpack_require__.r(__webpack_exports__);
     login: function login(_ref, user) {
       var commit = _ref.commit;
       return new Promise(function (resolve, reject) {
-        //     commit('auth_request');
         axios.post('api/v1/login', user).then(function (response) {
-          console.log(response);
-          var token = 'Bearer ' + response.data.data.accessToken; //     //     const user = response.data.user;
-
-          localStorage.setItem('Authorization', token);
-          axios.defaults.headers.common['Authorization'] = token; //     //     commit('auth_success', token, user);
-
+          var token = 'Bearer ' + response.data.data.accessToken;
+          sessionStorage.setItem('Authorization', token);
           resolve(response);
-        })["catch"](function (error) {
-          console.log(error.response);
         });
       });
     },
@@ -84335,13 +84327,12 @@ __webpack_require__.r(__webpack_exports__);
       var commit = _ref2.commit;
       return new Promise(function (resolve, reject) {
         axios.post('api/v1/logout').then(function (response) {
-          console.log(response); //     removeIsLogin();
-          //     localStorage.removeItem('loginUsername');
+          if (sessionStorage.getItem('Authorization')) {
+            sessionStorage.removeItem('Authorization');
+            delete axios.defaults.headers.common['Authorization'];
+          }
 
-          delete axios.defaults.headers.common['Authorization'];
           resolve(response);
-        })["catch"](function (error) {
-          console.log(error.response);
         });
       });
     }
@@ -84354,7 +84345,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./resources/js/store/mutation-types.js ***!
   \**********************************************/
-/*! exports provided: LOGIN, LOGOUT, SHOW_LOADING, HIDE_LOADING, UPDATE_TITLE, SET_INVALID, FLASH_MESSAGE, FLUSH_MESSAGE */
+/*! exports provided: LOGIN, LOGOUT, SHOW_LOADING, HIDE_LOADING, UPDATE_TITLE, SET_INVALID, FLASH_MESSAGE, DELETE_MESSAGE, EMPTY_MESSAGES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -84366,7 +84357,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TITLE", function() { return UPDATE_TITLE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_INVALID", function() { return SET_INVALID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FLASH_MESSAGE", function() { return FLASH_MESSAGE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FLUSH_MESSAGE", function() { return FLUSH_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_MESSAGE", function() { return DELETE_MESSAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_MESSAGES", function() { return EMPTY_MESSAGES; });
 var LOGIN = 'LOGIN';
 var LOGOUT = 'LOGOUT';
 var SHOW_LOADING = 'SHOW_LOADING';
@@ -84374,7 +84366,8 @@ var HIDE_LOADING = 'HIDE_LOADING';
 var UPDATE_TITLE = 'UPDATE_TITLE';
 var SET_INVALID = 'SET_INVALID';
 var FLASH_MESSAGE = 'FLASH_MESSAGE';
-var FLUSH_MESSAGE = 'FLUSH_MESSAGE';
+var DELETE_MESSAGE = 'DELETE_MESSAGE';
+var EMPTY_MESSAGES = 'EMPTY_MESSAGES';
 
 /***/ }),
 
@@ -84450,8 +84443,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   Object.assign(message, data);
   message.id = state.messages.length;
   state.messages.push(message);
-}), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["FLUSH_MESSAGE"], function (state, index) {
-  state.messages.splice(index, 1);
+}), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_MESSAGE"], function (state, index) {
+  state.messages.splice(state.messages.findIndex(function (item) {
+    return item.id === index;
+  }), 1);
+}), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_MESSAGES"], function (state) {
+  state.messages = [];
 }), _defineProperty(_types$SHOW_LOADING$t, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["SET_INVALID"], function (state, fails) {
   state.fails = fails;
 }), _types$SHOW_LOADING$t);
