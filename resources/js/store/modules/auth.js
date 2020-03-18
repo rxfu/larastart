@@ -1,3 +1,5 @@
+import * as types from '../mutation-types';
+
 export default {
     state: {
         token: '',
@@ -27,6 +29,10 @@ export default {
         logout(status) {
             state.status = '';
             state.token = '';
+        },
+        
+        [types.SET_TOKEN](state, token) {
+            state.token = token;
         }
     },
 
@@ -38,6 +44,7 @@ export default {
                     const token = 'Bearer ' + response.data.data.accessToken;
 
                     sessionStorage.setItem('Authorization', token);
+                    commit(types.SET_TOKEN, token);
 
                     resolve(response);
                 })

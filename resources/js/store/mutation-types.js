@@ -1,5 +1,3 @@
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
 export const SHOW_LOADING = 'SHOW_LOADING';
 export const HIDE_LOADING = 'HIDE_LOADING';
 export const UPDATE_TITLE = 'UPDATE_TITLE';
@@ -7,3 +5,4 @@ export const SET_INVALID = 'SET_INVALID';
 export const FLASH_MESSAGE = 'FLASH_MESSAGE';
 export const DELETE_MESSAGE = 'DELETE_MESSAGE';
 export const EMPTY_MESSAGES = 'EMPTY_MESSAGES';
+export const SET_TOKEN = 'SET_TOKEN';

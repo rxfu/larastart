@@ -19,10 +19,7 @@ router.beforeEach((to, from, next) => {
             next();
         } else {
             next({
-                name: 'Login',
-                query: {
-                    redirect: to.fullPath
-                }
+                name: 'Login'
             });
         }
     } else {

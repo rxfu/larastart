@@ -78,10 +78,6 @@ export default {
             }).catch(error => {
                 console.log(error.response);
             });
-            // axios.post('/api/v1/login', {
-            //     username: this.username,
-            //     password: this.password,
-            // })
         }
     }
 }

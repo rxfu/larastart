@@ -5,7 +5,7 @@
             <div class="spinner-border" role="status">
                 <span class="sr-only">加载中...</span>
             </div>
-            <p class="text-light">提交中，请稍候...</p>
+            <p class="text-light">请稍候...</p>
         </div>
     </div>
 </template>

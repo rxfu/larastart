@@ -65319,7 +65319,7 @@ var staticRenderFns = [
           [_c("span", { staticClass: "sr-only" }, [_vm._v("加载中...")])]
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "text-light" }, [_vm._v("提交中，请稍候...")])
+        _c("p", { staticClass: "text-light" }, [_vm._v("请稍候...")])
       ])
     ])
   }
@@ -65354,7 +65354,7 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "container" }, [
-            _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+            _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
               _c("img", {
                 staticClass: "brand-image img-circle elevation-3",
                 staticStyle: { opacity: ".8" },
@@ -65420,7 +65420,10 @@ var render = function() {
               [
                 _c(
                   "router-link",
-                  { staticClass: "nav-link", attrs: { to: { name: "Home" } } },
+                  {
+                    staticClass: "nav-link",
+                    attrs: { to: { name: "Dashboard" } }
+                  },
                   [_vm._v("使用说明")]
                 )
               ],
@@ -84027,10 +84030,7 @@ router.beforeEach(function (to, from, next) {
       next();
     } else {
       next({
-        name: 'Login',
-        query: {
-          redirect: to.fullPath
-        }
+        name: 'Login'
       });
     }
   } else {
@@ -84052,7 +84052,6 @@ router.beforeEach(function (to, from, next) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ([{
   path: '/',
-  name: 'Home',
   component: function component(resolve) {
     return __webpack_require__.e(/*! AMD require */ 4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/layouts/App.vue */ "./resources/js/pages/layouts/App.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
@@ -84061,6 +84060,10 @@ __webpack_require__.r(__webpack_exports__);
     requiresAuth: true
   },
   children: [{
+    path: '',
+    name: 'Home',
+    redirect: '/dashboard'
+  }, {
     path: '/dashboard',
     name: 'Dashboard',
     component: function component(resolve) {
@@ -84081,7 +84084,6 @@ __webpack_require__.r(__webpack_exports__);
   }]
 }, {
   path: '/auth',
-  name: 'Auth',
   component: function component(resolve) {
     return __webpack_require__.e(/*! AMD require */ 0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(/*! ./pages/layouts/Page.vue */ "./resources/js/pages/layouts/Page.vue")]; (resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__);}.bind(this)).catch(__webpack_require__.oe);
   },
@@ -84090,6 +84092,9 @@ __webpack_require__.r(__webpack_exports__);
     requiresAuth: false
   },
   children: [{
+    path: '',
+    redirect: '/login'
+  }, {
     path: '/login',
     name: 'Login',
     component: function component(resolve) {
@@ -84098,7 +84103,7 @@ __webpack_require__.r(__webpack_exports__);
   }]
 }, {
   path: '*',
-  redirect: '/auth/login'
+  redirect: '/login'
 }]);
 
 /***/ }),
@@ -84282,6 +84287,10 @@ webpackContext.id = "./resources/js/store/modules sync recursive .*\\.js$/";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mutation_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mutation-types */ "./resources/js/store/mutation-types.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
     token: '',
@@ -84295,7 +84304,7 @@ __webpack_require__.r(__webpack_exports__);
       return state.user;
     }
   },
-  mutations: {
+  mutations: _defineProperty({
     auth_request: function auth_request(state) {
       state.status = 'loading';
     },
@@ -84311,7 +84320,9 @@ __webpack_require__.r(__webpack_exports__);
       state.status = '';
       state.token = '';
     }
-  },
+  }, _mutation_types__WEBPACK_IMPORTED_MODULE_0__["SET_TOKEN"], function (state, token) {
+    state.token = token;
+  }),
   actions: {
     login: function login(_ref, user) {
       var commit = _ref.commit;
@@ -84319,6 +84330,7 @@ __webpack_require__.r(__webpack_exports__);
         axios.post('api/v1/login', user).then(function (response) {
           var token = 'Bearer ' + response.data.data.accessToken;
           sessionStorage.setItem('Authorization', token);
+          commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["SET_TOKEN"], token);
           resolve(response);
         });
       });
@@ -84345,13 +84357,11 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************************!*\
   !*** ./resources/js/store/mutation-types.js ***!
   \**********************************************/
-/*! exports provided: LOGIN, LOGOUT, SHOW_LOADING, HIDE_LOADING, UPDATE_TITLE, SET_INVALID, FLASH_MESSAGE, DELETE_MESSAGE, EMPTY_MESSAGES */
+/*! exports provided: SHOW_LOADING, HIDE_LOADING, UPDATE_TITLE, SET_INVALID, FLASH_MESSAGE, DELETE_MESSAGE, EMPTY_MESSAGES, SET_TOKEN */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT", function() { return LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_LOADING", function() { return SHOW_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HIDE_LOADING", function() { return HIDE_LOADING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_TITLE", function() { return UPDATE_TITLE; });
@@ -84359,8 +84369,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FLASH_MESSAGE", function() { return FLASH_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_MESSAGE", function() { return DELETE_MESSAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EMPTY_MESSAGES", function() { return EMPTY_MESSAGES; });
-var LOGIN = 'LOGIN';
-var LOGOUT = 'LOGOUT';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_TOKEN", function() { return SET_TOKEN; });
 var SHOW_LOADING = 'SHOW_LOADING';
 var HIDE_LOADING = 'HIDE_LOADING';
 var UPDATE_TITLE = 'UPDATE_TITLE';
@@ -84368,6 +84377,7 @@ var SET_INVALID = 'SET_INVALID';
 var FLASH_MESSAGE = 'FLASH_MESSAGE';
 var DELETE_MESSAGE = 'DELETE_MESSAGE';
 var EMPTY_MESSAGES = 'EMPTY_MESSAGES';
+var SET_TOKEN = 'SET_TOKEN';
 
 /***/ }),
 

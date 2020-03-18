@@ -60,7 +60,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['loading', 'title', 'messages']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['loading', 'title', 'messages'])),
+  methods: {
+    goBack: function goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/');
+    }
+  }
 });
 
 /***/ }),

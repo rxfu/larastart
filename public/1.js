@@ -87,10 +87,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       })["catch"](function (error) {
         console.log(error.response);
-      }); // axios.post('/api/v1/login', {
-      //     username: this.username,
-      //     password: this.password,
-      // })
+      });
     }
   })
 });
