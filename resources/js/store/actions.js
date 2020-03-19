@@ -47,7 +47,13 @@ export default {
     },
 
     flushMessages({commit}) {
-        commit(types.EMPTY_MESSAGES);
+        let timer;
+
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            commit(types.EMPTY_MESSAGES)
+        }, 3000);
     },
 
     flashInvalid({commit}, fails) {

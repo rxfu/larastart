@@ -23,15 +23,15 @@ export default {
         ])
     },
 
+    mounted() {
+        this.flushMessages();
+    },
+
     methods: {
         ...mapActions([
             'deleteMessage',
             'flushMessages'
         ])
-    },
-
-    destroyed() {
-        this.flushMessages();
     }
 }
 </script>

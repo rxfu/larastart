@@ -13717,10 +13717,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['messages'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['deleteMessage', 'flushMessages'])),
-  destroyed: function destroyed() {
+  mounted: function mounted() {
     this.flushMessages();
-  }
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['deleteMessage', 'flushMessages']))
 });
 
 /***/ }),
@@ -84167,7 +84167,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   flushMessages: function flushMessages(_ref9) {
     var commit = _ref9.commit;
-    commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_MESSAGES"]);
+    var timer;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_MESSAGES"]);
+    }, 3000);
   },
   flashInvalid: function flashInvalid(_ref10, fails) {
     var commit = _ref10.commit;
