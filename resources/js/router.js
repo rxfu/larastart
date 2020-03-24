@@ -1,7 +1,7 @@
-import VueBodyClass from 'vue-body-class';
 import routes from './routes';
 import store from './store';
 import VueRouter from 'vue-router';
+import VueBodyClass from 'vue-body-class';
 
 const vueBodyClass = new VueBodyClass(routes);
 

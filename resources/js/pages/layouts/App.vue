@@ -29,7 +29,9 @@
             <!-- Main content -->
             <section class="content">
                 <div class="content-fluid">
-                    <router-view></router-view>
+                    <transition>
+                        <router-view></router-view>
+                    </transition>
                 </div>
             </section>
         </div>

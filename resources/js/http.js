@@ -43,12 +43,11 @@ Axios.interceptors.response.use(
 
             switch (error.response.status) {
                 case 401:
-                    router.replace({
-                        name: 'Login',
-                        query: {
-                            redirect: router.currentRoute.fullPath
-                        }
-                    });
+                    if (router.currentRoute.name !== 'Login'){
+                        router.replace({
+                            name: 'Login'
+                        });
+                    }
             }
         }
 

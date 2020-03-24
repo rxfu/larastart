@@ -57,6 +57,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
@@ -114,7 +116,12 @@ var render = function() {
           _c("alert"),
           _vm._v(" "),
           _c("section", { staticClass: "content" }, [
-            _c("div", { staticClass: "content-fluid" }, [_c("router-view")], 1)
+            _c(
+              "div",
+              { staticClass: "content-fluid" },
+              [_c("transition", [_c("router-view")], 1)],
+              1
+            )
           ])
         ],
         1

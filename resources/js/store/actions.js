@@ -53,7 +53,7 @@ export default {
 
         timer = setTimeout(() => {
             commit(types.EMPTY_MESSAGES)
-        }, 3000);
+        }, 5000);
     },
 
     flashInvalid({commit}, fails) {

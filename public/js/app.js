@@ -83982,12 +83982,12 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(function 
 
     switch (error.response.status) {
       case 401:
-        _router__WEBPACK_IMPORTED_MODULE_2__["default"].replace({
-          name: 'Login',
-          query: {
-            redirect: _router__WEBPACK_IMPORTED_MODULE_2__["default"].currentRoute.fullPath
-          }
-        });
+        if (_router__WEBPACK_IMPORTED_MODULE_2__["default"].currentRoute.name !== 'Login') {
+          _router__WEBPACK_IMPORTED_MODULE_2__["default"].replace({
+            name: 'Login'
+          });
+        }
+
     }
   }
 
@@ -84005,20 +84005,34 @@ axios__WEBPACK_IMPORTED_MODULE_0___default.a.interceptors.response.use(function 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_body_class__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-body-class */ "./node_modules/vue-body-class/dist/index.js");
-/* harmony import */ var vue_body_class__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_body_class__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./routes */ "./resources/js/routes.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue_body_class__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-body-class */ "./node_modules/vue-body-class/dist/index.js");
+/* harmony import */ var vue_body_class__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_body_class__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
-var vueBodyClass = new vue_body_class__WEBPACK_IMPORTED_MODULE_0___default.a(_routes__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
+var vueBodyClass = new vue_body_class__WEBPACK_IMPORTED_MODULE_3___default.a(_routes__WEBPACK_IMPORTED_MODULE_0__["default"]);
+/**
+ * 重写路由的push方法和replace方法
+ */
+
+/* 
+const [routerPush, routerReplace] = [VueRouter.prototype.push, VueRouter.prototype.replace];
+VueRouter.prototype.push = function push(location) {
+    return routerPush.call(this, location).catch(error => error);
+};
+VueRouter.prototype.replace = function replace(location) {
+    return routerReplace.call(this, location).catch(error => error);
+};
+ */
+
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   mode: 'history',
   base: "/",
-  routes: _routes__WEBPACK_IMPORTED_MODULE_1__["default"]
+  routes: _routes__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 router.beforeEach(function (to, from, next) {
   vueBodyClass.guard(to, next);
@@ -84026,7 +84040,7 @@ router.beforeEach(function (to, from, next) {
   if (to.name !== 'Login' && to.matched.some(function (record) {
     return record.meta.requiresAuth;
   })) {
-    if (_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isLogin) {
+    if (_store__WEBPACK_IMPORTED_MODULE_1__["default"].getters.isLogin) {
       next();
     } else {
       next({
@@ -84171,7 +84185,7 @@ __webpack_require__.r(__webpack_exports__);
     clearTimeout(timer);
     timer = setTimeout(function () {
       commit(_mutation_types__WEBPACK_IMPORTED_MODULE_0__["EMPTY_MESSAGES"]);
-    }, 3000);
+    }, 5000);
   },
   flashInvalid: function flashInvalid(_ref10, fails) {
     var commit = _ref10.commit;
