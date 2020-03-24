@@ -9,6 +9,8 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <alert></alert>
+            
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
@@ -23,8 +25,6 @@
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
-            <alert></alert>
 
             <!-- Main content -->
             <section class="content">
